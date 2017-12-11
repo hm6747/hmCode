@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://G:/我的工作/学习资料/java进阶/17-宜立方商城或淘淘商城（ssm+dubbo+nginx+mysql统合项目二第80-93天）/e3商城_day01/e3商城_day01/黑马32期/01.教案-3.0/01.参考资料/mybatis/逆向工程/autoCode/autoCode.iml" filepath="G:/我的工作/学习资料/java进阶/17-宜立方商城或淘淘商城（ssm+dubbo+nginx+mysql统合项目二第80-93天）/e3商城_day01/e3商城_day01/黑马32期/01.教案-3.0/01.参考资料/mybatis/逆向工程/autoCode/autoCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-common/fastdfs/fastdfs_client.iml" filepath="$PROJECT_DIR$/../hmst-common/fastdfs/fastdfs_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../autoCode/generatorSqlmapCustom.iml" filepath="$PROJECT_DIR$/../autoCode/generatorSqlmapCustom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-common/hmst-common.iml" filepath="$PROJECT_DIR$/../hmst-common/hmst-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-content/hmst-content.iml" filepath="$PROJECT_DIR$/../hmst-content/hmst-content.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-content/hmst-content-interface/hmst-content-interface.iml" filepath="$PROJECT_DIR$/../hmst-content/hmst-content-interface/hmst-content-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-content/hmst-content-service/hmst-content-service.iml" filepath="$PROJECT_DIR$/../hmst-content/hmst-content-service/hmst-content-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-manager/hmst-manager.iml" filepath="$PROJECT_DIR$/../hmst-manager/hmst-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-manager/hmst-manager-dao/hmst-manager-dao.iml" filepath="$PROJECT_DIR$/../hmst-manager/hmst-manager-dao/hmst-manager-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-manager/hmst-manager-interface/hmst-manager-interface.iml" filepath="$PROJECT_DIR$/../hmst-manager/hmst-manager-interface/hmst-manager-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-manager/hmst-manager-pojo/hmst-manager-pojo.iml" filepath="$PROJECT_DIR$/../hmst-manager/hmst-manager-pojo/hmst-manager-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-manager/hmst-manager-service/hmst-manager-service.iml" filepath="$PROJECT_DIR$/../hmst-manager/hmst-manager-service/hmst-manager-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-manager-web/hmst-manager-web.iml" filepath="$PROJECT_DIR$/../hmst-manager-web/hmst-manager-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hmst-parent.iml" filepath="$PROJECT_DIR$/hmst-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-rest/hmst-rest.iml" filepath="$PROJECT_DIR$/../hmst-rest/hmst-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hmst-common/pagehelper/pagehelper.iml" filepath="$PROJECT_DIR$/../hmst-common/pagehelper/pagehelper.iml" />
+    </modules>
+  </component>
+</project>

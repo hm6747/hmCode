@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-content-service" />
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-content/hmst-content-service" />
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-manager/ee" />
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-manager/hmst-manager-service" />
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-manager/hmst-manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/hmst-common" />
+    <file type="web" url="file://$PROJECT_DIR$/hmst-rest" />
+    <file type="web" url="file://$PROJECT_DIR$/../hmst-rest" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/hmst-common/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-common/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-manager-web/pom.xml" />
+        <option value="G:/我的工作/学习资料/java进阶/17-宜立方商城或淘淘商城（ssm+dubbo+nginx+mysql统合项目二第80-93天）/e3商城_day01/e3商城_day01/黑马32期/01.教案-3.0/01.参考资料/mybatis/pagehelper-fix/pagehelper/pom.xml" />
+        <option value="G:/我的工作/学习资料/java进阶/17-宜立方商城或淘淘商城（ssm+dubbo+nginx+mysql统合项目二第80-93天）/e3商城_day01/e3商城_day01/黑马32期/01.教案-3.0/01.参考资料/FastDFS/bin/fastdfs_client/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-common/fastdfs_clients/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-common/pagehelper/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-common/fastdfs/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/../hmst-content/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+</project>
