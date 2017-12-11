@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hmst-manager-web:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="hmst-manager-web.war">
+      <element id="artifact" artifact-name="hmst-manager-web:war exploded" />
+    </root>
+  </artifact>
+</component>
