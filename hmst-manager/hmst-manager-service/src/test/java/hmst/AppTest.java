@@ -43,11 +43,13 @@ public class AppTest
      */
     public void testApp()
     {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-redis.xml");
+     /*   ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-redis.xml");
+        System.out.println(2);
         JedisClient jedisClient=applicationContext.getBean(JedisClient.class);
-        jedisClient.setJedisCluster("mytest","jedisClitent");
-        String string = jedisClient.getJedisCluster("mytest");
-        System.out.println(string);
+        System.out.println(1);
+        jedisClient.set("mytest","155");
+        String string = jedisClient.get("mytest");
+        System.out.println(string);*/
      /*   PageHelper.startPage(1,10);
         TbItemExample example = new TbItemExample();
         List<TbItem> list=tbItemMapper.selectByExample(example);
