@@ -56,6 +56,7 @@ public class JedisClientPool implements JedisClient {
 	@Override
 	public Long incr(String key) {
 		Jedis jedis = jedisPool.getResource();
+		jedis.auth("Hm123456");
 		Long result = jedis.incr(key);
 		jedis.close();
 		return result;
@@ -64,6 +65,7 @@ public class JedisClientPool implements JedisClient {
 	@Override
 	public Long hset(String key, String field, String value) {
 		Jedis jedis = jedisPool.getResource();
+		jedis.auth("Hm123456");
 		Long result = jedis.hset(key, field, value);
 		jedis.close();
 		return result;
@@ -72,6 +74,7 @@ public class JedisClientPool implements JedisClient {
 	@Override
 	public String hget(String key, String field) {
 		Jedis jedis = jedisPool.getResource();
+		jedis.auth("Hm123456");
 		String result = jedis.hget(key, field);
 		jedis.close();
 		return result;

@@ -29,15 +29,17 @@ public class ContentServiceImpl implements ContentService{
         content.setCreated(new Date());
         content.setUpdated(new Date());
         tbContentMapper.insert(content);
+        //同步
+        jedisClient.hdel(CONTENT_LIST,content.getCategoryId().toString());
         return HmResult.ok();
     }
 
     @Override
     public List<TbContent> getContentListByCid(long cid) {
-        try {
+     try {
             String json = jedisClient.hget(CONTENT_LIST,cid+"");
             if(StringUtils.isNotBlank(json)){
-                List<TbContent> tbContents =JsonUtils.jsonToList(json,TbContent.class);
+                List<TbContent> tbContents = JsonUtils.jsonToList(json,TbContent.class);
                 return  tbContents;
             }
         }catch (Exception e){
@@ -47,7 +49,7 @@ public class ContentServiceImpl implements ContentService{
         TbContentExample.Criteria criteria = example.createCriteria();
         criteria.andCategoryIdEqualTo(cid);
         List<TbContent> tbContents =tbContentMapper.selectByExampleWithBLOBs(example);
-        try {
+       try {
             jedisClient.hset(CONTENT_LIST,cid+"", JsonUtils.objectToJson(tbContents));
         }catch (Exception e){
             e.printStackTrace();
