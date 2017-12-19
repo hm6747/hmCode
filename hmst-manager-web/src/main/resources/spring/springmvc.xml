@@ -22,7 +22,7 @@
     <mvc:resources mapping="/js/**" location="/js/"/>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="hmst-manager-web"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.10.21:2181"/>
+    <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
     <dubbo:reference interface="cn.hmst.service.ItemService" id="itemService" />
     <dubbo:reference interface="cn.hmst.service.ItemCatService" id="itemCatService" />
     <dubbo:reference interface="cn.hmst.content.service.ContentCategoryService" id="ContentCategoryService" />

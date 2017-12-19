@@ -18,7 +18,7 @@
     </bean>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="hmst-rest"/>
-    <dubbo:registry protocol="zookeeper" address="192.168.10.21:2181"/>
+    <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
     <dubbo:reference interface="cn.hmst.content.service.ContentService" id="contentService" />
     <!-- 定义文件上传解析器 -->
 </beans>

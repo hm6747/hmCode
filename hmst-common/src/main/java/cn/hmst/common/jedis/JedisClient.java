@@ -2,10 +2,8 @@ package cn.hmst.common.jedis;
 
 public interface JedisClient {
 
-	String setJedisPool(String key, String value);
-	String getJedisPool(String key);
-	String setJedisCluster(String key, String value);
-	String getJedisCluster(String key);
+	String set(String key, String value);
+	String get(String key);
 	Boolean exists(String key);
 	Long expire(String key, int seconds);
 	Long ttl(String key);

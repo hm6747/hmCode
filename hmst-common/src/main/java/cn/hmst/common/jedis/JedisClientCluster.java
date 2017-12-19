@@ -8,22 +8,13 @@ public class JedisClientCluster implements JedisClient {
 	private JedisCluster jedisCluster;
 
 	@Override
-	public String setJedisPool(String key, String value) {
-		return null;
-	}
-
-	@Override
-	public String getJedisPool(String key) {
-		return null;
-	}
-
-	@Override
-	public String setJedisCluster(String key, String value) {
+	public String set(String key, String value) {
+		System.out.println(45);
 		return jedisCluster.set(key, value);
 	}
 
 	@Override
-	public String getJedisCluster(String key) {
+	public String get(String key) {
 		return jedisCluster.get(key);
 	}
 
@@ -62,19 +53,7 @@ public class JedisClientCluster implements JedisClient {
 		return jedisCluster.hdel(key, field);
 	}
 
-	public void setJediscluster(JedisCluster jediscluster) {
-		this.jedisCluster = jediscluster;
-	}
-
-	public JedisCluster getJediscluster() {
-		return jedisCluster;
-	}
-
 	public void setJedisCluster(JedisCluster jedisCluster) {
 		this.jedisCluster = jedisCluster;
-	}
-
-	public JedisCluster getJedisCluster() {
-		return jedisCluster;
 	}
 }
