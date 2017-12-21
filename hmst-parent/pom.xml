@@ -48,6 +48,7 @@
       <redis.version>2.8.1</redis.version>
       <fastdfs.version>1.25</fastdfs.version>
       <tomcat.version>6.0.36</tomcat.version>
+      <json-asl.version>1.9.13</json-asl.version>
     </properties>
     <dependencyManagement>
       <dependencies>
@@ -145,12 +146,12 @@
         <dependency>
           <groupId>org.codehaus.jackson</groupId>
           <artifactId>jackson-core-asl</artifactId>
-          <version>${jackson.version}</version>
+          <version>${json-asl.version}</version>
         </dependency>
         <dependency>
           <groupId>org.codehaus.jackson</groupId>
           <artifactId>jackson-mapper-asl</artifactId>
-          <version>${jackson.version}</version>
+          <version>${json-asl.version}</version>
         </dependency>
         <!-- httpclient -->
         <dependency>
