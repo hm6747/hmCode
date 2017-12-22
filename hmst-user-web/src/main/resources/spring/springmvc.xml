@@ -6,7 +6,6 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
-        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
     <!-- 启动注解驱动的spring mvc 功能 -->
@@ -16,12 +15,12 @@
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />-->
 <!--
     <mvc:interceptors>
-        <bean class="com.hmst.common.HttpInterceptor" />
+        <bean class="com.hmst.comon.HttpInterceptor" />
     </mvc:interceptors>
 -->
 
     <!-- 启动包扫描功能 -->
-    <context:component-scan base-package="cn.hmst.controller" />
+    <context:component-scan base-package="cn.hmst.user" />
 
     <mvc:resources location="/static/js/" mapping="/static/js/**"/>
     <mvc:resources location="/static/css/" mapping="/static/css/**"/>
@@ -31,7 +30,8 @@
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
 
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-
+    <bean class="cn.hmst.user.comon.ApplicationContextHelper" lazy-init="true"></bean>
+    <bean
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />

@@ -200,6 +200,11 @@
             <version>2.8.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>hmst</groupId>
+            <artifactId>hmst-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>hmst-user-web</finalName>
