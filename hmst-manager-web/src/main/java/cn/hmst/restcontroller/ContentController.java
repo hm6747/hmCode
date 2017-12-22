@@ -1,6 +1,6 @@
 package cn.hmst.restcontroller;
 
-import cn.hmst.common.pojo.HmResult;
+import cn.hmst.comon.pojo.HmResult;
 import cn.hmst.content.service.ContentService;
 import cn.hmst.pojo.TbContent;
 import org.springframework.beans.factory.annotation.Autowired;

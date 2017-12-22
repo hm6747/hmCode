@@ -1,7 +1,7 @@
 package cn.hmst.restcontroller;
 
-import cn.hmst.common.pojo.EasyUITreeNode;
-import cn.hmst.common.pojo.HmResult;
+import cn.hmst.comon.pojo.EasyUITreeNode;
+import cn.hmst.comon.pojo.HmResult;
 import cn.hmst.content.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
