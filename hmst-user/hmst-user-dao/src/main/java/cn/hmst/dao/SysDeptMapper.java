@@ -2,8 +2,9 @@ package cn.hmst.dao;
 
 import cn.hmst.pojo.SysDept;
 import cn.hmst.pojo.SysDeptExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SysDeptMapper {
     /**
@@ -93,4 +94,9 @@ public interface SysDeptMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysDept record);
+    List<SysDept> getAllDept();
+    List<SysDept> getChildListByLevel(@Param("level")String level);
+    void batchUpdateLevel(@Param("sysDeptList") List<SysDept> sysDeptList);
+    int countByNameAndParentId(@Param("parentId") Integer parentId, @Param("name") String name, @Param("id") Integer id);
+    int countByParentId(@Param("deptId") int deptId);
 }
