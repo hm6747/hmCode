@@ -6,6 +6,7 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
     <!-- 启动注解驱动的spring mvc 功能 -->
@@ -28,19 +29,15 @@
 
 
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
     <bean class="cn.hmst.user.comon.ApplicationContextHelper" lazy-init="true"></bean>
-    <bean
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/" />
         <property name="suffix" value=".jsp" />
     </bean>
     <!-- 引用dubbo服务 -->
-    <dubbo:application name="hmst-manager-web"/>
+    <dubbo:application name="hmst-user-web"/>
     <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
-   <!-- <dubbo:reference interface="cn.hmst.service.ItemService" id="itemService" />
-    <dubbo:reference interface="cn.hmst.service.ItemCatService" id="itemCatService" />
-    <dubbo:reference interface="cn.hmst.content.service.ContentCategoryService" id="ContentCategoryService" />
-    <dubbo:reference interface="cn.hmst.content.service.ContentService" id="contentService" />-->
+   <dubbo:reference interface="cn.hmst.service.SysTreesService" id="sysTreesService" />
+    <dubbo:reference interface="cn.hmst.service.SysDeptService" id="sysDeptService" />
 </beans>
