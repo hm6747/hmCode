@@ -1,7 +1,5 @@
 package hmst;
 
-import cn.hmst.common.jedis.JedisClient;
-import cn.hmst.common.jedis.JedisClientPool;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
