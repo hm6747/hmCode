@@ -1,7 +1,7 @@
 package cn.hmst.service;
 
-import cn.hmst.common.pojo.EasyUIDataGridResult;
-import cn.hmst.common.pojo.HmResult;
+import cn.hmst.comon.pojo.EasyUIDataGridResult;
+import cn.hmst.comon.pojo.HmResult;
 import cn.hmst.pojo.TbItem;
 
 /**
@@ -9,6 +9,6 @@ import cn.hmst.pojo.TbItem;
  */
 public interface ItemService {
     TbItem getItemById(long itemId);
-    EasyUIDataGridResult getItemList(int page,int rows);
-    HmResult addItem(TbItem tbItem ,String desc);
+    EasyUIDataGridResult getItemList(int page, int rows);
+    HmResult addItem(TbItem tbItem , String desc);
 }

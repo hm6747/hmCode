@@ -49,9 +49,16 @@
       <fastdfs.version>1.25</fastdfs.version>
       <tomcat.version>6.0.36</tomcat.version>
       <json-asl.version>1.9.13</json-asl.version>
+      <guava.version>22.0</guava.version>
     </properties>
     <dependencyManagement>
       <dependencies>
+        <!--google-->
+        <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>${guava.version}</version>
+        </dependency>
         <!-- jsp api -->
         <dependency>
           <groupId>org.apache.tomcat</groupId>

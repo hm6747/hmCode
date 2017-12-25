@@ -1,6 +1,6 @@
 package cn.hmst.search.mapper;
 
-import cn.hmst.common.pojo.SearchItem;
+import cn.hmst.search.SearchItem;
 
 import java.util.List;
 
