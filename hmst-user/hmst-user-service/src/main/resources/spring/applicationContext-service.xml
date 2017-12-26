@@ -22,6 +22,8 @@
     <!-- 声明需要暴露的服务接口 -->
     <bean id="sysDeptService" class="cn.hmst.impl.SysDeptServiceImpl" />
     <bean id="sysTreesService" class="cn.hmst.impl.SysTreesServiceImpl" />
+    <bean id="sysUserService" class="cn.hmst.impl.SysUserServiceImpl" />
     <dubbo:service interface="cn.hmst.service.SysDeptService" ref="sysDeptServiceImpl" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysTreesService" ref="sysTreesServiceImpl" timeout="600000"/>
+    <dubbo:service interface="cn.hmst.service.SysUserService" ref="sysUserService" timeout="600000"/>
 </beans>

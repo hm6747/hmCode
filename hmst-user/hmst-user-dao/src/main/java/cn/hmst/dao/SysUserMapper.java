@@ -2,8 +2,10 @@ package cn.hmst.dao;
 
 import cn.hmst.pojo.SysUser;
 import cn.hmst.pojo.SysUserExample;
-import java.util.List;
+import cn.hmst.query.PageQuery;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SysUserMapper {
     /**
@@ -93,4 +95,9 @@ public interface SysUserMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysUser record);
+    SysUser findByKeword(String keyword);
+    int conuntByMail(@Param("mail")String mail,@Param("id")Integer id);
+    int conuntByTelphone(@Param("telephone")String telephone87,@Param("id")Integer id);
+    int conuntByDeptId(@Param("deptId")Integer deptId);
+    List<SysUser> getPageByDeptId(@Param("deptId")int deptId, @Param("page") PageQuery page);
 }

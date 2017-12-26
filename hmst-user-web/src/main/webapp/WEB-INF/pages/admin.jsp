@@ -1,5 +1,3 @@
-<%@ page import="com.mmall.common.RequestHolder" %>
-<%@ page import="com.mmall.model.SysUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +79,7 @@
 
         <ul class="nav nav-list">
             <li class="active">
-                <a class="popstyle" href="/sys/user/page.do" target="_blank">
+                <a class="popstyle" href="/sys/dept/dept.page" target="_blank">
                     <i class="menu-icon fa fa-tachometer"></i>
                     <span class="menu-text"> 首页 </span>
                 </a>

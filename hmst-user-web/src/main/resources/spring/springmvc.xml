@@ -13,31 +13,30 @@
     <mvc:annotation-driven/>
     <context:property-placeholder location="classpath:config/fileServer.properties"></context:property-placeholder>
 
-    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />-->
-<!--
-    <mvc:interceptors>
-        <bean class="com.hmst.comon.HttpInterceptor" />
-    </mvc:interceptors>
--->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+        <mvc:interceptors>
+            <bean class="cn.hmst.user.comon.HttpInterceptor" />
+        </mvc:interceptors>
 
     <!-- 启动包扫描功能 -->
-    <context:component-scan base-package="cn.hmst.user" />
+    <context:component-scan base-package="cn.hmst.user"/>
 
-    <mvc:resources location="/static/js/" mapping="/static/js/**"/>
-    <mvc:resources location="/static/css/" mapping="/static/css/**"/>
-    <mvc:resources location="/static/images/" mapping="/static/images/**"/>
+    <mvc:resources location="/static/js/" mapping="/js/**"/>
+    <mvc:resources location="/static/css/" mapping="/css/**"/>
+    <mvc:resources location="/static/bootstrap3.3.5/" mapping="/bootstrap3.3.5/**"/>
+    <mvc:resources location="/static/assets/" mapping="/assets/**"/>
 
-
-    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
     <bean class="cn.hmst.user.comon.ApplicationContextHelper" lazy-init="true"></bean>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="hmst-user-web"/>
     <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
-   <dubbo:reference interface="cn.hmst.service.SysTreesService" id="sysTreesService" />
-    <dubbo:reference interface="cn.hmst.service.SysDeptService" id="sysDeptService" />
+    <dubbo:reference interface="cn.hmst.service.SysTreesService" id="sysTreesService"/>
+    <dubbo:reference interface="cn.hmst.service.SysDeptService" id="sysDeptService"/>
+    <dubbo:reference interface="cn.hmst.service.SysUserService" id="sysUserService"/>
 </beans>

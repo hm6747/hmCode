@@ -76,9 +76,9 @@
         <filter-name>DruidWebStatFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--<filter>
+    <filter>
         <filter-name>loginFilter</filter-name>
-        <filter-class>com.mmall.filter.LoginFilter</filter-class>
+        <filter-class>cn.hmst.user.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>loginFilter</filter-name>
@@ -86,7 +86,7 @@
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
-    <filter>
+    <!--<filter>
         <filter-name>aclControlFilter</filter-name>
         <filter-class>com.hmst.filter.AclControlFilter</filter-class>
         <init-param>

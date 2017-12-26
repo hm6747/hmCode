@@ -5,6 +5,7 @@ import cn.hmst.comon.util.BeanValidator;
 import cn.hmst.comon.util.LevelUtil;
 import cn.hmst.dao.SysDeptMapper;
 import cn.hmst.param.DeptParam;
+import cn.hmst.param.RequestHolder;
 import cn.hmst.pojo.SysDept;
 import cn.hmst.service.SysDeptService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         SysDept sysDept = SysDept.builder().name(param.getName()).parentId(param.getParentId())
                 .seq(param.getSeq()).remark(param.getRemark()).build();
         sysDept.setLevel(LevelUtil.calculateLevel(getLevel(param.getParentId()), param.getParentId()));
-        sysDept.setOperator("admin");//TO DO
+        sysDept.setOperator(RequestHolder.getCurrentUser().getUsername());//TO DO
         sysDept.setOperatorIp("127.0.0.1");
         sysDept.setOperatorTime(new Date());
         sysDeptMapper.insertSelective(sysDept);
@@ -51,7 +52,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         SysDept sysDept = SysDept.builder().name(param.getName()).parentId(param.getParentId())
                 .seq(param.getSeq()).remark(param.getRemark()).id(param.getId()).build();
         sysDept.setLevel(LevelUtil.calculateLevel(getLevel(param.getParentId()), param.getParentId()));
-        sysDept.setOperator("admin");//TO DO
+        sysDept.setOperator(RequestHolder.getCurrentUser().getUsername());//TO DO
         sysDept.setOperatorIp("127.0.0.1");
         sysDept.setOperatorTime(new Date());
         updateWithChild(sysDeptBefore, sysDept);
