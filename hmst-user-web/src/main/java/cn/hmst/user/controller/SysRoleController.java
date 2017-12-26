@@ -2,32 +2,24 @@ package cn.hmst.user.controller;
 
 import cn.hmst.comon.pojo.JsonData;
 import cn.hmst.param.RoleParam;
-import cn.hmst.pojo.SysUser;
 import cn.hmst.service.SysRoleService;
 import cn.hmst.service.SysTreesService;
 import cn.hmst.service.SysUserService;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import org.jboss.netty.util.internal.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/sys/role")
 public class SysRoleController {
 
-    @Resource
+    @Autowired
     private SysRoleService sysRoleService;
-    @Resource
+    @Autowired
     private SysTreesService sysTreeService;
 /*    @Resource
     private SysRoleAclService sysRoleAclService;
@@ -55,13 +47,13 @@ public class SysRoleController {
         return JsonData.success();
     }
 
-    /*@RequestMapping("/list.json")
+    @RequestMapping("/list.json")
     @ResponseBody
     public JsonData list() {
         return JsonData.success(sysRoleService.getAll());
     }
 
-    @RequestMapping("/roleTree.json")
+   /* @RequestMapping("/roleTree.json")
     @ResponseBody
     public JsonData roleTree(@RequestParam("roleId") int roleId) {
         return JsonData.success(sysTreeService.roleTree(roleId));
