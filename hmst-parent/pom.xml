@@ -50,9 +50,14 @@
       <tomcat.version>6.0.36</tomcat.version>
       <json-asl.version>1.9.13</json-asl.version>
       <guava.version>22.0</guava.version>
+      <spring-session.version>1.0.1.RELEASE</spring-session.version>
     </properties>
     <dependencyManagement>
       <dependencies>
+        <dependency>
+          <groupId>org.springframework.session</groupId>
+          <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
         <!--google-->
         <dependency>
           <groupId>com.google.guava</groupId>
