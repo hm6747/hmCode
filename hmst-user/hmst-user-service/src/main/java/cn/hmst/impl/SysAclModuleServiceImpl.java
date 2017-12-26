@@ -6,7 +6,6 @@ import cn.hmst.comon.util.LevelUtil;
 import cn.hmst.dao.SysAclMapper;
 import cn.hmst.dao.SysAclModuleMapper;
 import cn.hmst.param.AclModuleParam;
-import cn.hmst.param.RequestHolder;
 import cn.hmst.pojo.SysAclModule;
 import cn.hmst.service.SysAclModuleService;
 import com.google.common.base.Preconditions;
@@ -58,7 +57,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
         SysAclModule after = SysAclModule.builder().id(param.getId()).name(param.getName()).parentId(param.getParentId()).seq(param.getSeq())
                 .status(param.getStatus()).remark(param.getRemark()).build();
         after.setLevel(LevelUtil.calculateLevel(getLevel(param.getParentId()), param.getParentId()));
-        after.setOperator(RequestHolder.getCurrentUser().getUsername());
+        after.setOperator("admin");
         after.setOperatorIp("127.0.0.1");
         after.setOperatorTime(new Date());
 

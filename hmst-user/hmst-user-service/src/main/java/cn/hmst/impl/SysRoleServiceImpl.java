@@ -6,7 +6,6 @@ import cn.hmst.dao.SysRoleAclMapper;
 import cn.hmst.dao.SysRoleMapper;
 import cn.hmst.dao.SysRoleUserMapper;
 import cn.hmst.dao.SysUserMapper;
-import cn.hmst.param.RequestHolder;
 import cn.hmst.param.RoleParam;
 import cn.hmst.pojo.SysRole;
 import cn.hmst.service.SysRoleService;
@@ -39,7 +38,7 @@ public class SysRoleServiceImpl implements SysRoleService{
         }
         SysRole role = SysRole.builder().name(param.getName()).status(param.getStatus()).type(param.getType())
                 .remark(param.getRemark()).build();
-        role.setOperator(RequestHolder.getCurrentUser().getUsername());
+        role.setOperator("admin");
         role.setOperatorIp("127.0.0.1");
         role.setOperatorTime(new Date());
         sysRoleMapper.insertSelective(role);
@@ -59,7 +58,7 @@ public class SysRoleServiceImpl implements SysRoleService{
 
         SysRole after = SysRole.builder().id(param.getId()).name(param.getName()).status(param.getStatus()).type(param.getType())
                 .remark(param.getRemark()).build();
-        after.setOperator(RequestHolder.getCurrentUser().getUsername());
+        after.setOperator("admnin");
         after.setOperatorIp("127.0.0.1");
         after.setOperatorTime(new Date());
         sysRoleMapper.updateByPrimaryKeySelective(after);
@@ -68,6 +67,7 @@ public class SysRoleServiceImpl implements SysRoleService{
 */
     }
 
+    @Override
     public List<SysRole> getAll() {
         return sysRoleMapper.getAll();
     }

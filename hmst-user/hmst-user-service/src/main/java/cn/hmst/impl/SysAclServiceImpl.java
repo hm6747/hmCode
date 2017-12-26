@@ -4,15 +4,14 @@ import cn.hmst.comon.exception.ParamException;
 import cn.hmst.comon.util.BeanValidator;
 import cn.hmst.dao.SysAclMapper;
 import cn.hmst.param.AclParam;
-import cn.hmst.param.RequestHolder;
 import cn.hmst.pojo.SysAcl;
 import cn.hmst.query.PageQuery;
 import cn.hmst.query.PageResult;
 import cn.hmst.service.SysAclService;
 import com.google.common.base.Preconditions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
 @Service
 public class SysAclServiceImpl implements SysAclService {
 
-    @Resource
+    @Autowired
     private SysAclMapper sysAclMapper;
 
     /*    @Resource
@@ -34,7 +33,7 @@ public class SysAclServiceImpl implements SysAclService {
         SysAcl acl = SysAcl.builder().name(param.getName()).aclModuleId(param.getAclModuleId()).url(param.getUrl())
                 .type(param.getType()).status(param.getStatus()).seq(param.getSeq()).remark(param.getRemark()).build();
         acl.setCode(generateCode());
-        acl.setOperator(RequestHolder.getCurrentUser().getUsername());
+        acl.setOperator("admin"/*RequestHolder.getCurrentUser().getUsername()*/);
         acl.setOperatorTime(new Date());
         acl.setOperatorIp("127.0.0.1");
         sysAclMapper.insertSelective(acl);
