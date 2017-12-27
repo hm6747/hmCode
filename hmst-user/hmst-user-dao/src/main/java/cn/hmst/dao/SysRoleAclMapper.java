@@ -94,4 +94,11 @@ public interface SysRoleAclMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysRoleAcl record);
+    List<Integer> getAclIdListByRoleIdList(@Param("roleIdList") List<Integer> roleIdList);
+
+    void deleteByRoleId(@Param("roleId") int roleId);
+
+    void batchInsert(@Param("roleAclList") List<SysRoleAcl> roleAclList);
+
+    List<Integer> getRoleIdListByAclId(@Param("aclId") int aclId);
 }

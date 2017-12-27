@@ -2,8 +2,9 @@ package cn.hmst.dao;
 
 import cn.hmst.pojo.SysRoleUser;
 import cn.hmst.pojo.SysRoleUserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SysRoleUserMapper {
     /**
@@ -93,4 +94,13 @@ public interface SysRoleUserMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysRoleUser record);
+    List<Integer> getRoleIdListByUserId(@Param("userId") int userId);
+
+    List<Integer> getUserIdListByRoleId(@Param("roleId") int roleId);
+
+    void deleteByRoleId(@Param("roleId") int roleId);
+
+    void batchInsert(@Param("roleUserList") List<SysRoleUser> roleUserList);
+
+    List<Integer> getUserIdListByRoleIdList(@Param("roleIdList") List<Integer> roleIdList);
 }
