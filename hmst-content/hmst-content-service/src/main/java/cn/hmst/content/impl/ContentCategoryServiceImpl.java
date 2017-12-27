@@ -1,7 +1,7 @@
 package cn.hmst.content.impl;
 
-import cn.hmst.common.pojo.EasyUITreeNode;
-import cn.hmst.common.pojo.HmResult;
+import cn.hmst.comon.pojo.EasyUITreeNode;
+import cn.hmst.comon.pojo.HmResult;
 import cn.hmst.content.service.ContentCategoryService;
 import cn.hmst.mapper.TbContentCategoryMapper;
 import cn.hmst.pojo.TbContentCategory;

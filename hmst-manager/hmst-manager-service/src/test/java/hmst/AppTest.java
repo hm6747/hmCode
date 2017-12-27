@@ -1,11 +1,8 @@
 package hmst;
 
-import cn.hmst.common.jedis.JedisClient;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Unit test for simple App.
@@ -36,13 +33,13 @@ public class AppTest
      */
     public void testApp()
     {
-       ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-redis.xml");
+  /*     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-redis.xml");
         System.out.println(2);
         JedisClient jedisClient=applicationContext.getBean(JedisClient.class);
         System.out.println(1);
         jedisClient.set("mytest","155");
         String string = jedisClient.get("mytest");
-        System.out.println(string);
+        System.out.println(string);*/
      /*   PageHelper.startPage(1,10);
         TbItemExample example = new TbItemExample();
         List<TbItem> list=tbItemMapper.selectByExample(example);

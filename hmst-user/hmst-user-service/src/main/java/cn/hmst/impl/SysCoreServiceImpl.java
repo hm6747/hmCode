@@ -1,6 +1,5 @@
 package cn.hmst.impl;
 
-import cn.hmst.comon.util.JsonMapper;
 import cn.hmst.dao.SysAclMapper;
 import cn.hmst.dao.SysRoleAclMapper;
 import cn.hmst.dao.SysRoleUserMapper;
@@ -10,13 +9,12 @@ import cn.hmst.pojo.SysUser;
 import cn.hmst.service.SysCoreService;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class SysCoreServiceImpl implements SysCoreService{
@@ -77,10 +75,12 @@ public class SysCoreServiceImpl implements SysCoreService{
         if (CollectionUtils.isEmpty(aclList)) {
             return true;
         }
-
-    /*    List<SysAcl> userAclList = getCurrentUserAclListFromCache();*/
-        Set<Integer> userAclIdSet = userAclList.stream().map(acl -> acl.getId()).collect(Collectors.toSet());
-
+        List<SysAcl> userAclList = Lists.newArrayList();/* getCurrentUserAclListFromCache();*/
+        Set<Integer> userAclIdSet = new HashSet<>();
+        for (SysAcl acl:
+                userAclList) {
+            userAclIdSet.add(acl.getId());
+        }
         boolean hasValidAcl = false;
         // 规则：只要有一个权限点有权限，那么我们就认为有访问权限
         for (SysAcl acl : aclList) {

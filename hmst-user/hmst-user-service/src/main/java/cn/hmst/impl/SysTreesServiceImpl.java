@@ -1,6 +1,7 @@
 package cn.hmst.impl;
 
 import cn.hmst.comon.util.LevelUtil;
+import cn.hmst.dao.SysAclMapper;
 import cn.hmst.dao.SysAclModuleMapper;
 import cn.hmst.dao.SysDeptMapper;
 import cn.hmst.dto.AclDto;
@@ -19,11 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * Created by hm on 2017/12/23.
@@ -34,17 +31,29 @@ public class SysTreesServiceImpl implements SysTreesService {
     private SysDeptMapper sysDeptMapper;
     @Resource
     private SysAclModuleMapper sysAclModuleMapper;
+    @Autowired
+    private SysAclMapper sysAclMapper;
+    @Autowired
+    private SysCoreService sysCoreService;
+
     public List<AclModuleLevelDto> roleTree(int roleId) {
         // 1、当前用户已分配的权限点
-        List<SysAcl> userAclList = SysCoreServiceImpl.getCurrentUserAclList();
+        List<SysAcl> userAclList = sysCoreService.getCurrentUserAclList();
         // 2、当前角色分配的权限点
-        List<SysAcl> roleAclList = SysCoreService.getRoleAclList(roleId);
+        List<SysAcl> roleAclList = sysCoreService.getRoleAclList(roleId);
         // 3、当前系统所有权限点
         List<AclDto> aclDtoList = Lists.newArrayList();
 
-        Set<Integer> userAclIdSet = userAclList.stream().map(sysAcl -> sysAcl.getId()).collect(Collectors.toSet());
-        Set<Integer> roleAclIdSet = roleAclList.stream().map(sysAcl -> sysAcl.getId()).collect(Collectors.toSet());
-
+        Set<Integer> userAclIdSet = new HashSet<>();
+        for (SysAcl acl:
+             userAclList) {
+            userAclIdSet.add(acl.getId());
+        }
+        Set<Integer> roleAclIdSet = new HashSet<>();
+        for (SysAcl acl:
+             roleAclList) {
+            roleAclIdSet.add(acl.getId());
+        }
         List<SysAcl> allAclList = sysAclMapper.getAll();
         for (SysAcl acl : allAclList) {
             AclDto dto = AclDto.adapt(acl);

@@ -1,7 +1,7 @@
 package cn.hmst.content.service;
 
-import cn.hmst.common.pojo.EasyUITreeNode;
-import cn.hmst.common.pojo.HmResult;
+import cn.hmst.comon.pojo.EasyUITreeNode;
+import cn.hmst.comon.pojo.HmResult;
 
 import java.util.List;
 

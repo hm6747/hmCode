@@ -1,10 +1,7 @@
 package cn.hmst.impl;
 
-import cn.hmst.common.pojo.EasyUITreeNode;
-import cn.hmst.common.pojo.HmResult;
-import cn.hmst.mapper.TbContentCategoryMapper;
+import cn.hmst.comon.pojo.EasyUITreeNode;
 import cn.hmst.mapper.TbItemCatMapper;
-import cn.hmst.pojo.TbContentCategory;
 import cn.hmst.pojo.TbItemCat;
 import cn.hmst.pojo.TbItemCatExample;
 import cn.hmst.service.ItemCatService;
@@ -12,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
