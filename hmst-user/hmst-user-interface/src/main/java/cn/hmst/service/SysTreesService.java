@@ -1,5 +1,6 @@
 package cn.hmst.service;
 
+import cn.hmst.dto.AclModuleLevelDto;
 import cn.hmst.dto.SysDeptDto;
 
 import java.util.List;
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface SysTreesService {
     public List<SysDeptDto> deptTree();
+    public List<AclModuleLevelDto> aclModuleTree();
 }

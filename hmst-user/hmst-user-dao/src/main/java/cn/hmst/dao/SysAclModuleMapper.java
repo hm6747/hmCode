@@ -94,4 +94,13 @@ public interface SysAclModuleMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysAclModule record);
+    int countByNameAndParentId(@Param("parentId") Integer parentId, @Param("name") String name, @Param("id") Integer id);
+
+    List<SysAclModule> getChildAclModuleListByLevel(@Param("level") String level);
+
+    void batchUpdateLevel(@Param("sysAclModuleList") List<SysAclModule> sysAclModuleList);
+
+    List<SysAclModule> getAllAclModule();
+
+    int countByParentId(@Param("aclModuleId") int aclModuleId);
 }

@@ -39,4 +39,5 @@
     <dubbo:reference interface="cn.hmst.service.SysTreesService" id="sysTreesService"/>
     <dubbo:reference interface="cn.hmst.service.SysDeptService" id="sysDeptService"/>
     <dubbo:reference interface="cn.hmst.service.SysUserService" id="sysUserService"/>
+    <dubbo:reference interface="cn.hmst.service.SysAclModuleService" id="sysAclModuleService"/>
 </beans>

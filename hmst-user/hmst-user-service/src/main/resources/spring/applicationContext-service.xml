@@ -23,7 +23,9 @@
     <bean id="sysDeptService" class="cn.hmst.impl.SysDeptServiceImpl" />
     <bean id="sysTreesService" class="cn.hmst.impl.SysTreesServiceImpl" />
     <bean id="sysUserService" class="cn.hmst.impl.SysUserServiceImpl" />
+    <bean id="sysAclModuleService" class="cn.hmst.impl.SysAclModuleServiceImpl" />
     <dubbo:service interface="cn.hmst.service.SysDeptService" ref="sysDeptServiceImpl" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysTreesService" ref="sysTreesServiceImpl" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysUserService" ref="sysUserService" timeout="600000"/>
+    <dubbo:service interface="cn.hmst.service.SysAclModuleService" ref="sysAclModuleService" timeout="600000"/>
 </beans>
