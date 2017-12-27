@@ -11,6 +11,13 @@
 
     <!-- 启动注解驱动的spring mvc 功能 -->
     <mvc:annotation-driven/>
+    <context:annotation-config/>
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+    <bean class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
+        <property name="hostName" value="120.79.53.121"/>
+        <property name="port" value="7000"/>
+        <property name="password" value="Hm123456"/>
+    </bean>
     <context:property-placeholder location="classpath:config/fileServer.properties"></context:property-placeholder>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
