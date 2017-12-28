@@ -57,6 +57,7 @@
         <dependency>
           <groupId>org.springframework.session</groupId>
           <artifactId>spring-session-data-redis</artifactId>
+          <version>${spring-session.version}</version>
         </dependency>
         <!--google-->
         <dependency>
