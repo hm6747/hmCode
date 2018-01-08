@@ -15,6 +15,7 @@ public class FastDFSClient {
 		if (conf.contains("classpath:")) {
 			conf = conf.replace("classpath:", this.getClass().getResource("/").getPath());
 		}
+		int a = 1;
 		ClientGlobal.init(conf);
 		trackerClient = new TrackerClient();
 		trackerServer = trackerClient.getConnection();

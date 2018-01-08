@@ -17,6 +17,7 @@ public class JsonMapper {
 
     static {
         // config
+        int a = 1;
         objectMapper.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);
         objectMapper.setFilters(new SimpleFilterProvider().setFailOnUnknownId(false));
