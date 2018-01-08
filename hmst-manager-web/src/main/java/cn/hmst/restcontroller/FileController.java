@@ -1,7 +1,7 @@
 package cn.hmst.restcontroller;
 
-import cn.hmst.comon.util.FastDFSClient;
-import cn.hmst.comon.util.JsonUtils;
+import cn.hmst.common.util.FastDFSClient;
+import cn.hmst.common.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

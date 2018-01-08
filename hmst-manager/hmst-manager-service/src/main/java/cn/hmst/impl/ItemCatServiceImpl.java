@@ -1,6 +1,6 @@
 package cn.hmst.impl;
 
-import cn.hmst.comon.pojo.EasyUITreeNode;
+import cn.hmst.common.pojo.EasyUITreeNode;
 import cn.hmst.mapper.TbItemCatMapper;
 import cn.hmst.pojo.TbItemCat;
 import cn.hmst.pojo.TbItemCatExample;

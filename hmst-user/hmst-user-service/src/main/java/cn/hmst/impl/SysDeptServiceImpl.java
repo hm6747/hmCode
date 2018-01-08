@@ -1,8 +1,8 @@
 package cn.hmst.impl;
 
-import cn.hmst.comon.exception.ParamException;
-import cn.hmst.comon.util.BeanValidator;
-import cn.hmst.comon.util.LevelUtil;
+import cn.hmst.common.exception.ParamException;
+import cn.hmst.common.util.BeanValidator;
+import cn.hmst.common.util.LevelUtil;
 import cn.hmst.dao.SysDeptMapper;
 import cn.hmst.param.DeptParam;
 import cn.hmst.pojo.SysDept;

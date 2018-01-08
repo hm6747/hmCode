@@ -1,6 +1,6 @@
 package cn.hmst.user.controller;
 
-import cn.hmst.comon.pojo.JsonData;
+import cn.hmst.common.pojo.JsonData;
 import cn.hmst.param.AclModuleParam;
 import cn.hmst.service.SysAclModuleService;
 import cn.hmst.service.SysTreesService;

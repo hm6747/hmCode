@@ -1,6 +1,6 @@
 package cn.hmst.restcontroller;
 
-import cn.hmst.comon.pojo.EasyUITreeNode;
+import cn.hmst.common.pojo.EasyUITreeNode;
 import cn.hmst.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

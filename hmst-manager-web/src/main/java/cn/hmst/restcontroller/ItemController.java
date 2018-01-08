@@ -1,7 +1,7 @@
 package cn.hmst.restcontroller;
 
-import cn.hmst.comon.pojo.EasyUIDataGridResult;
-import cn.hmst.comon.pojo.HmResult;
+import cn.hmst.common.pojo.EasyUIDataGridResult;
+import cn.hmst.common.pojo.HmResult;
 import cn.hmst.pojo.TbItem;
 import cn.hmst.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

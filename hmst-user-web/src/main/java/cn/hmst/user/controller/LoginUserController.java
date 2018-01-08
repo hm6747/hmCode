@@ -1,6 +1,6 @@
 package cn.hmst.user.controller;
 
-import cn.hmst.comon.util.MD5Util;
+import cn.hmst.common.util.MD5Util;
 import cn.hmst.pojo.SysUser;
 import cn.hmst.service.SysUserService;
 import com.alibaba.dubbo.common.utils.StringUtils;

@@ -1,8 +1,8 @@
 package cn.hmst.impl;
 
-import cn.hmst.comon.pojo.EasyUIDataGridResult;
-import cn.hmst.comon.pojo.HmResult;
-import cn.hmst.comon.util.IDUtils;
+import cn.hmst.common.pojo.EasyUIDataGridResult;
+import cn.hmst.common.pojo.HmResult;
+import cn.hmst.common.util.IDUtils;
 import cn.hmst.mapper.TbItemDescMapper;
 import cn.hmst.mapper.TbItemMapper;
 import cn.hmst.pojo.TbItem;

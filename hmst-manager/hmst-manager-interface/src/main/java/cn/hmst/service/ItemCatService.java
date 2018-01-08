@@ -1,6 +1,6 @@
 package cn.hmst.service;
 
-import cn.hmst.comon.pojo.EasyUITreeNode;
+import cn.hmst.common.pojo.EasyUITreeNode;
 
 import java.util.List;
 

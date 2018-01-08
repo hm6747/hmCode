@@ -1,6 +1,6 @@
 package cn.hmst.impl;
 
-import cn.hmst.comon.util.LevelUtil;
+import cn.hmst.common.util.LevelUtil;
 import cn.hmst.dao.SysAclMapper;
 import cn.hmst.dao.SysAclModuleMapper;
 import cn.hmst.dao.SysDeptMapper;

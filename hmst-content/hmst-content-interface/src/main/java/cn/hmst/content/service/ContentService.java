@@ -1,6 +1,6 @@
 package cn.hmst.content.service;
 
-import cn.hmst.comon.pojo.HmResult;
+import cn.hmst.common.pojo.HmResult;
 import cn.hmst.pojo.TbContent;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package cn.hmst.user.controller;
 
-import cn.hmst.comon.pojo.JsonData;
+import cn.hmst.common.pojo.JsonData;
 import cn.hmst.param.AclParam;
 import cn.hmst.query.PageQuery;
 import cn.hmst.service.SysAclService;

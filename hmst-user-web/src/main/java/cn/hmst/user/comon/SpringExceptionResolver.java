@@ -1,8 +1,8 @@
 package cn.hmst.user.comon;
 
-import cn.hmst.comon.exception.ParamException;
-import cn.hmst.comon.exception.PermissionException;
-import cn.hmst.comon.pojo.JsonData;
+import cn.hmst.common.exception.ParamException;
+import cn.hmst.common.exception.PermissionException;
+import cn.hmst.common.pojo.JsonData;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;

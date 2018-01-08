@@ -1,7 +1,7 @@
 package cn.hmst.impl;
 
-import cn.hmst.comon.exception.ParamException;
-import cn.hmst.comon.util.BeanValidator;
+import cn.hmst.common.exception.ParamException;
+import cn.hmst.common.util.BeanValidator;
 import cn.hmst.dao.SysRoleAclMapper;
 import cn.hmst.dao.SysRoleMapper;
 import cn.hmst.dao.SysRoleUserMapper;
