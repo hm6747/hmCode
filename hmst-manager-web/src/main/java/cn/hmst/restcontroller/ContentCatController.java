@@ -20,7 +20,7 @@ public class ContentCatController {
     private ContentCategoryService contentCategoryService;
     @RequestMapping("/content/category/list")
     @ResponseBody
-    public List<EasyUITreeNode> getContentCatList(@RequestParam(name="id",defaultValue ="0") long parentId){
+    public List<EasyUITreeNode> getContentCatList(@RequestParam(name="id",defaultValue ="1") long parentId){
         List<EasyUITreeNode> list = contentCategoryService.getContentCatList(parentId);
         return  list;
     }
