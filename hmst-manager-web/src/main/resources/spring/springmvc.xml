@@ -9,26 +9,29 @@
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     <!--加载配置文件-->
-    <context:component-scan base-package="cn.hmst.restcontroller" />
+    <context:component-scan base-package="cn.hmst.restcontroller"/>
     <context:property-placeholder location="classpath:config/fileServer.properties"></context:property-placeholder>
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
     <bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
     <!--配置资源映射-->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/html/**" location="/WEB-INF/html/"/>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="hmst-manager-web"/>
     <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
-    <dubbo:reference interface="cn.hmst.service.ItemService" id="itemService" />
-    <dubbo:reference interface="cn.hmst.service.ItemCatService" id="itemCatService" />
-    <dubbo:reference interface="cn.hmst.content.service.ContentCategoryService" id="ContentCategoryService" />
-    <dubbo:reference interface="cn.hmst.content.service.ContentService" id="contentService" />
+    <dubbo:reference interface="cn.hmst.service.ItemService" id="itemService"/>
+    <dubbo:reference interface="cn.hmst.service.ItemCatService" id="itemCatService"/>
+    <dubbo:reference interface="cn.hmst.content.service.ContentCategoryService" id="ContentCategoryService"/>
+    <dubbo:reference interface="cn.hmst.content.service.ContentService" id="contentService"/>
     <!-- 定义文件上传解析器 -->
-  <bean id="multipartResolver"
+    <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"></property>
         <property name="maxUploadSize" value="5242880"></property>
