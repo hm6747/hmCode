@@ -15,12 +15,13 @@ import java.util.*;
 /**
  * Created by hm on 2017/12/22.
  */
-public class BeanValidators {
+public class BeanValidator {
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
     public static <T> Map<String, String> validate(T t, Class... groups) {
         Validator validator = validatorFactory.getValidator();
         Set validatorResult = validator.validate(t, groups);
+        int a = 1;
         if (validatorResult.isEmpty()) {
             return Collections.emptyMap();
         } else {
