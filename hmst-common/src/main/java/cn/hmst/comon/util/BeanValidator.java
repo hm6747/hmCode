@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * Created by hm on 2017/12/22.
  */
-public class BeanValidator {
+public class BeanValidators {
     private static ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
 
     public static <T> Map<String, String> validate(T t, Class... groups) {
