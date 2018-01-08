@@ -13,7 +13,7 @@ public class PageController {
     @RequestMapping("/")
     public String showIndex(){
 
-        return  "index";
+        return  "redirect:/html/index.html";
     }
 
     @RequestMapping("/{page}")
