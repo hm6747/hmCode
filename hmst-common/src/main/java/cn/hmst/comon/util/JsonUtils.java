@@ -13,7 +13,6 @@ public class JsonUtils {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    int a = 1;
     /**
      * 将对象转换成json字符串。
      * <p>Title: pojoToJson</p>

@@ -21,7 +21,6 @@ public class BeanValidator {
     public static <T> Map<String, String> validate(T t, Class... groups) {
         Validator validator = validatorFactory.getValidator();
         Set validatorResult = validator.validate(t, groups);
-        int a = 1;
         if (validatorResult.isEmpty()) {
             return Collections.emptyMap();
         } else {

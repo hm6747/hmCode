@@ -21,7 +21,6 @@ public class IDUtils {
 		long millis = System.currentTimeMillis();
 		//long millis = System.nanoTime();
 		//加上三位随机数
-		int a = 1;
 		Random random = new Random();
 		int end3 = random.nextInt(999);
 		//如果不足三位前面补0
