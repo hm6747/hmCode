@@ -18,6 +18,7 @@
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="/css/plugins/fileinput/fileinput.min.css" rel="stylesheet">
     <link href="/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
@@ -86,7 +87,8 @@
                             <label class="col-sm-2 control-label">商品图片</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control">
+                                <input type="file" name="image" id="imgUpload" multiple/>
+                                <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -131,6 +133,9 @@
 <!--富文本-->
 <script src="/js/plugins/summernote/summernote.min.js"></script>
 <script src="/js/plugins/summernote/summernote-zh-CN.js"></script>
+<!--上传文件-->
+<script src="/js/plugins/fileinput/fileinput.min.js"></script>
+<script src="/js/plugins/fileinput/fileinput_local_zh.js"></script>
 <!-- 自定义js -->
 <script src="/js/content.js?v=1.0.0"></script>
 
@@ -145,13 +150,14 @@
         $('.summernote').summernote({
             lang: 'zh-CN'
         });
-        $("#save").on("click",function () {
+        $("#save").on("click", function () {
             save();
         });
-        $("#edit").on("click",function () {
+        $("#edit").on("click", function () {
             edit();
         });
         $("#edit").click();
+        initFileInput("imgUpload", "");
     });
     function edit() {
         $("#eg").addClass("no-padding");
@@ -164,6 +170,35 @@
         $("#eg").removeClass("no-padding");
         var aHTML = $('.click2edit').code(); //save HTML If you need(aHTML: array).
         $('.click2edit').destroy();
+    }
+    //初始化fileinput控件（第一次初始化）
+    function initFileInput(ctrlName, uploadUrl) {
+        var control = $('#' + ctrlName);
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: uploadUrl, //上传的地址
+            allowedFileExtensions: ['jpg', 'png', 'gif'],//接收的文件后缀
+            maxFileCount: 5,
+            showUpload: false, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            removeFromPreviewOnError: true, //当文件不符合规则，就不显示预览
+            //showPreview: true,//展前预览
+            showRemove: true, //是否显示删除按钮
+        }).on('filepreupload', function (event, data, previewId, index) {     //上传中
+            var form = data.form, files = data.files, extra = data.extra,
+                    response = data.response, reader = data.reader;
+            console.log('文件正在上传');
+        }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
+            console.log('文件上传成功！' + data.id);
+
+        }).on('fileerror', function (event, data, msg) {  //一个文件上传失败
+            console.log('文件上传失败！' + data.id);
+        })
     }
 </script>
 
