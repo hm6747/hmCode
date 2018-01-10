@@ -94,7 +94,7 @@
                                     <td><a href="#">{{title}}</a></td>
                                     <td>{{price}}</td>
                                     <td>{{num}}</td>
-                                    <td>{{status}}</td>
+                                    <td>{{showStatus}}</td>
                                     <td class="am-hide-sm-only">{{cid}}</td>
                                     <td class="am-hide-sm-only">{{id}}</td>
                                     <td class="am-hide-sm-only">{{sellPoint}}</td>
@@ -187,7 +187,11 @@ $(function () {
                 rows: pageSize
             },
             success: function (result) {
-                var rendered = Mustache.render(itemListTemplate,{itemList: result.rows});
+                var rendered = Mustache.render(itemListTemplate,{itemList: result.rows,
+                    "showStatus": function() {
+                        return this.status == 1 ? "正常": this.status == 2?"下架":"删除";
+                    }
+                });
                 $("#itemListTable").append(rendered);
             }
         })
