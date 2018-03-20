@@ -3,8 +3,6 @@ package hmst;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 /**
  * Unit test for simple App.
@@ -35,10 +33,10 @@ public class AppTest
      */
     public void testApp()
     {
-        JedisPool jedisPool = new JedisPool("120.79.53.121",7000);
+  /*      JedisPool jedisPool = new JedisPool("120.79.53.121",7000);
         Jedis jedis = jedisPool.getResource();
         jedis.auth("Hm123456");
         jedis.set("a","1000");
-        System.out.println(jedis.get("a"));
+        System.out.println(jedis.get("a"));*/
     }
 }

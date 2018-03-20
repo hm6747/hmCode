@@ -1,6 +1,7 @@
 package cn.hmst.common.exception;
 
 public class PermissionException extends RuntimeException {
+    private static final long serialVersionUID = 2332608236621015980L;
 
     public PermissionException() {
         super();
