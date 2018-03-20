@@ -25,7 +25,7 @@ public class SysAclController {
     @RequestMapping("/save.json")
     @ResponseBody
     public JsonData saveAclModule(AclParam param) {
-        sysAclService.save(param);
+     sysAclService.save(param);
         return JsonData.success();
     }
 
@@ -38,8 +38,8 @@ public class SysAclController {
 
     @RequestMapping("/page.json")
     @ResponseBody
-    public JsonData list(@RequestParam("aclModuleId") Integer aclModuleId, PageQuery pageQuery) {
-        return JsonData.success(sysAclService.getPageByAclModuleId(aclModuleId, pageQuery));
+    public JsonData list(@RequestParam("aclModuleId") Integer aclModuleId, PageQuery pageQuery, String keyword) {
+        return JsonData.success(sysAclService.getPageByAclModuleId(aclModuleId, pageQuery,keyword));
     }
 
 /*    @RequestMapping("acls.json")

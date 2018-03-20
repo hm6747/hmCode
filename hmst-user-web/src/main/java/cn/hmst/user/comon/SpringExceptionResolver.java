@@ -4,23 +4,19 @@ import cn.hmst.common.exception.ParamException;
 import cn.hmst.common.exception.PermissionException;
 import cn.hmst.common.pojo.JsonData;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @Slf4j
 public class SpringExceptionResolver implements HandlerExceptionResolver {
-private Logger log;
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         String url = request.getRequestURL().toString();
         ModelAndView mv;
-        String defaultMsg = "System error";
-
+        String defaultMsg = "系统错误";
         // 这里我们要求项目中所有请求json数据，都使用.json结尾
         if (url.endsWith(".json")) {
             if (ex instanceof PermissionException || ex instanceof ParamException) {

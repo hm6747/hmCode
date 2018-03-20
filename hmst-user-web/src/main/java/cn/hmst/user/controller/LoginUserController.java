@@ -24,7 +24,7 @@ public class LoginUserController {
     @RequestMapping("/logout.page")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().invalidate();
-        String path = "signin.jsp";
+        String path = "index.jsp";
         response.sendRedirect(path);
     }
 
@@ -52,7 +52,7 @@ public class LoginUserController {
                 response.sendRedirect(ret);
                 return;
             }else {
-                response.sendRedirect("/admin/index.page");
+                response.sendRedirect("/admin/login.page");
                 return;
             }
         }
@@ -61,7 +61,7 @@ public class LoginUserController {
         if(StringUtils.isNotEmpty(ret)){
             request.setAttribute("ret",ret);
         }
-        String path = "signin.jsp";
+        String path = "index.jsp";
         request.getRequestDispatcher(path).forward(request, response);
     }
 }

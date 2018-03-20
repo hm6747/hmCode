@@ -4,7 +4,7 @@
         <artifactId>hmst-parent</artifactId>
         <groupId>hmst</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../hmst-parent/pom.xml</relativePath>
+        <relativePath>../hmst-sys/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>hmst-user-web</artifactId>
@@ -28,10 +28,6 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -227,10 +223,10 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- lombok -->
-        <dependency>
+   <!--     <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
         <finalName>hmst-user-web</finalName>

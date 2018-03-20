@@ -11,13 +11,6 @@
 
     <!-- 启动注解驱动的spring mvc 功能 -->
     <mvc:annotation-driven/>
-    <context:annotation-config/>
-    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
-    <bean class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
-        <property name="hostName" value="120.79.53.121"/>
-        <property name="port" value="7000"/>
-        <property name="password" value="Hm123456"/>
-    </bean>
     <context:property-placeholder location="classpath:config/fileServer.properties"></context:property-placeholder>
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
@@ -28,13 +21,19 @@
     <!-- 启动包扫描功能 -->
     <context:component-scan base-package="cn.hmst.user"/>
 
-    <mvc:resources location="/static/js/" mapping="/js/**"/>
+<!--    <mvc:resources location="/static/js/" mapping="/js/**"/>
     <mvc:resources location="/static/css/" mapping="/css/**"/>
     <mvc:resources location="/static/bootstrap3.3.5/" mapping="/bootstrap3.3.5/**"/>
-    <mvc:resources location="/static/assets/" mapping="/assets/**"/>
-
+    <mvc:resources location="/static/assets/" mapping="/assets/**"/>-->
+    <!--配置资源映射-->
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
+    <mvc:resources mapping="/fonts/**" location="/fonts/"/>
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/img/**" location="/img/"/>
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+    <bean class="cn.hmst.user.comon.SpringExceptionResolver" />
     <bean class="cn.hmst.user.comon.ApplicationContextHelper" lazy-init="true"></bean>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
@@ -42,11 +41,14 @@
     </bean>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="hmst-user-web"/>
-    <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
+    <dubbo:registry protocol="zookeeper" address="120.79.53.121:7011"/>
     <dubbo:reference interface="cn.hmst.service.SysTreesService" id="sysTreesService"/>
     <dubbo:reference interface="cn.hmst.service.SysDeptService" id="sysDeptService"/>
     <dubbo:reference interface="cn.hmst.service.SysUserService" id="sysUserService"/>
     <dubbo:reference interface="cn.hmst.service.SysAclModuleService" id="sysAclModuleService"/>
     <dubbo:reference interface="cn.hmst.service.SysAclService" id="sysAclService"/>
     <dubbo:reference interface="cn.hmst.service.SysRoleService" id="sysRoleService"/>
+    <dubbo:reference interface="cn.hmst.service.SysRoleAclService" id="sysRoleAclService"/>
+    <dubbo:reference interface="cn.hmst.service.SysRoleUserService" id="sysRoleUserService"/>
+    <dubbo:reference interface="cn.hmst.service.SysLogService" id="sysLogService"/>
 </beans>

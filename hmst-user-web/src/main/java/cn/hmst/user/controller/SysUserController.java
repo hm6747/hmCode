@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
+
     @RequestMapping("/save.json")
     @ResponseBody
     public JsonData saveDept(UserParam param) {
@@ -33,14 +34,14 @@ public class SysUserController {
     @RequestMapping("/update.json")
     @ResponseBody
     public JsonData updateUser(UserParam param) {
-        sysUserService.update(param);
+            sysUserService.update(param);
         return JsonData.success();
     }
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public JsonData page(@RequestParam("deptId") int deptId, PageQuery pageQuery) {
-        PageResult<SysUser> result = sysUserService.getPageByDeptId(deptId,pageQuery);
+    public JsonData page(@RequestParam("deptId") int deptId, PageQuery pageQuery, String keyword) {
+        PageResult<SysUser> result = sysUserService.getPageByDeptId(deptId, pageQuery, keyword);
         return JsonData.success(result);
     }
 }

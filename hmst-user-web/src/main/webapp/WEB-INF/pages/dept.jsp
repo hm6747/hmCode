@@ -1,206 +1,311 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<jsp:include page="/common/common_quote.jsp"/>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>部门管理</title>
-    <jsp:include page="/common/backend_common.jsp"/>
-    <jsp:include page="/common/page.jsp"/>
 </head>
-<body class="no-skin" youdao="bind" style="background: white">
-<input id="gritter-light" checked="" type="checkbox" class="ace ace-switch ace-switch-5"/>
 
-<div class="page-header">
-    <h1>
-        用户管理
-        <small>
-            <i class="ace-icon fa fa-angle-double-right"></i>
-            维护部门与用户关系
-        </small>
-    </h1>
-</div>
-<div class="main-content-inner">
-    <div class="col-sm-3">
-        <div class="table-header">
-            部门列表&nbsp;&nbsp;
-            <a class="green" href="#">
-                <i class="ace-icon fa fa-plus-circle orange bigger-130 dept-add"></i>
-            </a>
-        </div>
-        <div id="deptList">
-        </div>
-    </div>
-    <div class="col-sm-9">
-        <div class="col-xs-12">
-            <div class="table-header">
-                用户列表&nbsp;&nbsp;
-                <a class="green" href="#">
-                    <i class="ace-icon fa fa-plus-circle orange bigger-130 user-add"></i>
-                </a>
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox ">
+
+                <div class="ibox-content">
+                    <%--        <span class="text-muted small pull-right">最后更新：<i class="fa fa-clock-o"></i> 2015-09-01 12:00</span>--%>
+                    <h2>部门管理</h2>
+                    <div class="ibox-tools">
+                        <a onclick="addDpet()" data-toggle="modal" data-target="#deptModel"
+                           class="btn btn-primary btn-xs" userModel><i class="fa fa-plus"></i>创建新部门</a>
+                    </div>
+                    <p>
+                        所有部门必须状态正常
+                    </p>
+                    <div id="deptTree" class="dd nestable2"></div>
+                    <script id="deptListTemplate" type="x-tmpl-mustache">
+                    <ol class="dd-list">
+                     {{#deptTreeList}}
+                        <li class="dd-item dept-name" data-id="{{id}}" id="dept_{{id}}">
+                        <div class="dd-handle dd-content" style="text-align: left;">
+                            <span class="label label-info"><i class="fa fa-users"></i></span> {{name}}
+                          <a  class="fa-hover delDept" style="float:right;margin-right: 20px"  data-id="{{id}}"><i class="fa fa-trash-o"></i></a>
+                           <a class="fa-hover editDept" style="float:right;margin-right: 10px" data-toggle="modal" data-target="#deptModel" data-id="{{id}}"><i class="fa fa-edit"></i></a>
+                        </div>
+                        </li>
+                     {{/deptTreeList}}
+                     </ol>
+
+
+
+                    </script>
+                </div>
             </div>
-            <div>
-                <div id="dynamic-table_wrapper" class="dataTables_wrapper form-inline no-footer">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="dataTables_length" id="dynamic-table_length"><label>
-                                展示
-                                <select id="pageSize" name="dynamic-table_length" aria-controls="dynamic-table"
-                                        class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select> 条记录 </label>
+        </div>
+        <div class="col-sm-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <%--     <span class="text-muted small pull-right">最后更新：<i class="fa fa-clock-o"></i> 2015-09-01 12:00</span>--%>
+                    <h2>用户管理</h2>
+                    <p>
+                        所有用户必须状态正常
+                    </p>
+                    <div class="input-group">
+                        <input type="text" placeholder="查找用户(支持姓名、邮箱、手机号模糊查询)" class="input form-control" id="keyword">
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn btn-primary" id="search"><i
+                                                class="fa fa-search"></i>
+                                            搜索
+                                        </button>
+                                </span>
+                    </div>
+                    <div class="clients-list">
+                        <ul class="nav nav-tabs">
+                            <span class="pull-right small text-muted">总共<span id="total"></span>个用户</span>
+                            <div class="ibox-tools" style="float: right">
+                                <a onclick="addUser()" class="btn btn-primary btn-xs" data-toggle="modal"
+                                   data-target="#userModel"><i class="fa fa-plus"></i>创建新用户</a>
+                            </div>
+                            <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> 用户</a>
+                            </li>
+                            <%--        <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i> 部门</a>
+                                    </li>--%>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="full-height-scroll">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="table-id">头像</th>
+                                                <th class="table-title">姓名</th>
+                                                <th class="table-type">部门</th>
+                                                <th class="table-num">邮箱</th>
+                                                <th class="table-type ">电话</th>
+                                                <th class="table-type ">状态</th>
+                                                <th class="table-set">操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="listTable">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <table id="dynamic-table" class="table table-striped table-bordered table-hover dataTable no-footer"
-                           role="grid"
-                           aria-describedby="dynamic-table_info" style="font-size:14px">
-                        <thead>
-                        <tr role="row">
-                            <th tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
-                                姓名
-                            </th>
-                            <th tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
-                                所属部门
-                            </th>
-                            <th tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
-                                邮箱
-                            </th>
-                            <th tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
-                                电话
-                            </th>
-                            <th tabindex="0" aria-controls="dynamic-table" rowspan="1" colspan="1">
-                                状态
-                            </th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label=""></th>
-                        </tr>
-                        </thead>
-                        <tbody id="userList"></tbody>
-                    </table>
-                    <div class="row" id="userPage">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="dialog-dept-form" style="display: none;">
-    <form id="deptForm">
-        <table class="table table-striped table-bordered table-hover dataTable no-footer" role="grid">
-            <tr>
-                <td style="width: 80px;"><label for="parentId">上级部门</label></td>
-                <td>
-                    <select id="parentId" name="parentId" data-placeholder="选择部门" style="width: 200px;"></select>
-                    <input type="hidden" name="id" id="deptId"/>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="deptName">名称</label></td>
-                <td><input type="text" name="name" id="deptName" value="" class="text ui-widget-content ui-corner-all">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="deptSeq">顺序</label></td>
-                <td><input type="text" name="seq" id="deptSeq" value="1" class="text ui-widget-content ui-corner-all">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="deptRemark">备注</label></td>
-                <td><textarea name="remark" id="deptRemark" class="text ui-widget-content ui-corner-all" rows="3"
-                              cols="25"></textarea></td>
-            </tr>
-        </table>
-    </form>
-</div>
-<div id="dialog-user-form" style="display: none;">
-    <form id="userForm">
-        <table class="table table-striped table-bordered table-hover dataTable no-footer" role="grid">
-            <tr>
-                <td style="width: 80px;"><label for="parentId">所在部门</label></td>
-                <td>
-                    <select id="deptSelectId" name="deptId" data-placeholder="选择部门" style="width: 200px;"></select>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="userName">名称</label></td>
-                <input type="hidden" name="id" id="userId"/>
-                <td><input type="text" name="username" id="userName" value=""
-                           class="text ui-widget-content ui-corner-all"></td>
-            </tr>
-            <tr>
-                <td><label for="userMail">邮箱</label></td>
-                <td><input type="text" name="mail" id="userMail" value="" class="text ui-widget-content ui-corner-all">
-                </td>
-            </tr>
-            <tr>
-                <td><label for="userTelephone">电话</label></td>
-                <td><input type="text" name="telephone" id="userTelephone" value=""
-                           class="text ui-widget-content ui-corner-all"></td>
-            </tr>
-            <tr>
-                <td><label for="userStatus">状态</label></td>
-                <td>
-                    <select id="userStatus" name="status" data-placeholder="选择状态" style="width: 150px;">
-                        <option value="1">有效</option>
-                        <option value="0">无效</option>
-                        <option value="2">删除</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><label for="userRemark">备注</label></td>
-                <td><textarea name="remark" id="userRemark" class="text ui-widget-content ui-corner-all" rows="3"
-                              cols="25"></textarea></td>
-            </tr>
-        </table>
-    </form>
-</div>
-
-<script id="deptListTemplate" type="x-tmpl-mustache">
-<ol class="dd-list">
-    {{#deptList}}
-        <li class="dd-item dd2-item dept-name" id="dept_{{id}}" href="javascript:void(0)" data-id="{{id}}">
-            <div class="dd2-content" style="cursor:pointer;">
-            {{name}}
-            <span style="float:right;">
-                <a class="green dept-edit" href="#" data-id="{{id}}" >
-                    <i class="ace-icon fa fa-pencil bigger-100"></i>
-                </a>
-                &nbsp;
-                <a class="red dept-delete" href="#" data-id="{{id}}" data-name="{{name}}">
-                    <i class="ace-icon fa fa-trash-o bigger-100"></i>
-                </a>
-            </span>
+<div class="modal inmodal" id="deptModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="addDeptTitle">添加部门</h4>
+                <%--     <small>这里可以显示副标题。--%>
             </div>
-        </li>
-    {{/deptList}}
-</ol>
+            <form method="get" class="form-horizontal" id="deptForm">
+                <div class="col-md-12 modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">上级部门</label>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary"
+                                    id="addDeptBtn">
+                                选择部门
+                            </button>
+                            <button type="button" class="btn btn-primary"
+                                    id="resetDeptBtn">
+                                清空部门
+                            </button>
+                            <span style="margin-left: 20px;" id="deptName"></span>
+                            <input readonly name="id" type="hidden" id="deptId">
+                            <input readonly name="parentId" type="hidden" id="parentId" value="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div id="addDeptTree" class="dd nestable2 col-sm-10" style="display: none"></div>
+                        <script id="addDeptListTemplate" type="x-tmpl-mustache">
+                                                        <ol class="dd-list">
+                                                                {{#addDeptTreeList}}
+                                                                <li class="dd-item dept-name" data-id="{{id}}" id="addDept_{{id}}">
+                                                                <div class="dd-handle dd-content" style="text-align: left;">
+                                                                    <span class="label label-info"><i class="fa fa-users"></i></span> {{name}}
+                                                                </div>
+                                                                </li>
+                                                             {{/addDeptTreeList}}
+                                                         </ol>
 
 
 
-
-
-
-
-
-</script>
-<script id="userListTemplate" type="x-tmpl-mustache">
-{{#userList}}
-<tr role="row" class="user-name odd" data-id="{{id}}"><!--even -->
-    <td><a href="#" class="user-edit" data-id="{{id}}">{{username}}</a></td>
-    <td>{{showDeptName}}</td>
-    <td>{{mail}}</td>
-    <td>{{telephone}}</td>
-    <td>{{#bold}}{{showStatus}}{{/bold}}</td> <!-- 此处套用函数对status做特殊处理 -->
-    <td>
-        <div class="hidden-sm hidden-xs action-buttons">
-            <a class="green user-edit" href="#" data-id="{{id}}">
-                <i class="ace-icon fa fa-pencil bigger-100"></i>
-            </a>
-            <a class="red user-acl" href="#" data-id="{{id}}">
-                <i class="ace-icon fa fa-flag bigger-100"></i>
-            </a>
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" aria-required="true" required name="name"
+                                   id="addDeptDeptName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">顺序</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="seq" id="addDeptSeq" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea name="remark" id="addDeptRemark" class="form-control" required=""
+                                      aria-required="true"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white closeModel" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
+
+<div class="modal inmodal" id="userModel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="addUserTitle">添加用户</h4>
+                <%--     <small>这里可以显示副标题。--%>
+            </div>
+            <form method="get" class="form-horizontal" id="userForm">
+                <div class="col-md-12 modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">所在部门</label>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary"
+                                    id="addUserBtn">
+                                选择部门
+                            </button>
+                            <span style="margin-left: 20px;" id="addDeptName"></span>
+                            <input readonly name="deptId" type="hidden" id="addDdeptId">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                        <div id="addUserDeptTree" class="dd nestable2 col-sm-10" style="display: none"></div>
+                        <script id="addUserDeptListTemplate" type="x-tmpl-mustache">
+                                                        <ol class="dd-list">
+                                                                {{#addUserDeptTreeList}}
+                                                                <li class="dd-item dept-name" data-id="{{id}}" id="addUserDept_{{id}}">
+                                                                <div class="dd-handle dd-content" style="text-align: left;">
+                                                                    <span class="label label-info"><i class="fa fa-users"></i></span> {{name}}
+                                                                </div>
+                                                                </li>
+                                                             {{/addUserDeptTreeList}}
+                                                         </ol>
+
+
+
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" aria-required="true" required id="addUserName"
+                                   name="username">
+                            <input type="hidden" name="id" id="userId"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="mail" id="addUserMail" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="telephone" id="addUserTelephone" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">状态</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b" id="addUserStatus" name="status" data-placeholder="选择状态">
+                                <option value="1">有效</option>
+                                <option value="0">无效</option>
+                                <option value="2">冻结</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea name="remark" id="addUserRemark" class="form-control" required=""
+                                      aria-required="true"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white closeModel" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal inmodal" id="roleUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span
+                        aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title">分配角色</h4>
+                <%--     <small>这里可以显示副标题。--%>
+            </div>
+            <form method="get" class="form-horizontal" id="roleUserForm">
+                <input type="hidden" id="updateUserRoleId">
+                <div class="col-md-12 modal-body">
+                    <div class="form-group">
+                        <ul id="roleUserTree" class="ztree"></ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white closeModel" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="roleUserUpdate">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script id="listTemplate" type="x-tmpl-mustache">
+{{#userList}}
+<tr>
+    <td class="client-avatar"><img alt="image" src="${pageContext.request.contextPath}/img/a2.jpg"> </td>
+    <td><a data-toggle="tab" href="#contact-1" class="client-link">{{username}}</a>
+    </td>
+    <td> {{showDeptName}}</td>
+    <td >
+    {{mail}}
+    </td>
+    <td>  {{telephone}}</td>
+    <td class="client-status"><span class="label {{statusClass}}">{{showStatus}}</span>
+    </td>
+    <td>
+                          <a  class="btn btn-white btn-sm editUser" data-toggle="modal" data-target="#userModel"
+                                        data-Id="{{id}}" data-deptId="{{deptId}}"><i class="fa fa-pencil"></i> 编辑 </a>
+                     <a class="btn btn-white btn-sm"><i class="fa fa-folder"></i> 删除 </a>
+                    <a class="btn btn-white btn-sm userRole" data-Id="{{id}}" data-toggle="modal" data-target="#roleUserModal"><i class="fa fa-user" ></i> 角色 </a>
     </td>
 </tr>
 {{/userList}}
@@ -208,343 +313,347 @@
 
 
 
-
-
-
-
 </script>
-
-<script type="application/javascript">
-    $(function () {
-        var deptList; //缓存树形部门
-        var deptMap = {};
-        var userMap = {};
-        var optionstr = "";
-        var lastClickDeptId = -1;
-        var deptListTemplate = $("#deptListTemplate").html();
-        Mustache.parse(deptListTemplate);
-        var userListTemplte = $("#userListTemplate").html();
-        Mustache.parse(userListTemplte);
-        loadDeptTree();
-        function loadDeptTree() {
-            $.ajax({
-                url: "/sys/dept/tree.json",
-                success: function (result) {
-                    if (result.ret) {
-                        deptList = result.data;
-                        var rendred = Mustache.render(deptListTemplate, {deptList: deptList});
-                        $("#deptList").html(rendred);
-                        recursiveRenderDept(deptList);
-                    } else {
-                        showMessage("加载部门列表", result.msg, false);
-                    }
-                }
-            })
-        }
-
-        function recursiveRenderDept(deptList) {
-            if (deptList && deptList.length > 0) {
-                $(deptList).each(function (i, dept) {
-                    deptMap[dept.id] = dept;
-                    if (dept.deptDtoList.length > 0) {
-                        var rendered = Mustache.render(deptListTemplate, {deptList: dept.deptDtoList});
-                        $("#dept_" + dept.id).append(rendered);
-                        recursiveRenderDept(dept.deptDtoList)
-                        bindDeptClick();
-                    }
-                })
-            }
-        }
-
-        //绑定部门点击事件
-        function bindDeptClick() {
-            $(".dept-delete").click(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var deptid = $("#deptid").attr("data-id");
-                var deptName = $(this).attr("data-name");
-                if (confirm("确定要删除部门[" + deptName + "]吗?")) {
-                    //TODD
-                    console.log("delete dept:" + deptName);
-                }
-            })
-            $(".dept-name").click(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var deptid = $(this).attr("data-id");
-                handleDeptSelected(deptid);
-            })
-            $(".dept-edit").click(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var deptId = $(this).attr("data-id");
-                $("#dialog-dept-form").dialog({
-                    model: true,
-                    title: "编辑部门",
-                    open: function (event, ui) {
-                        $(".ui-dialog-titlebar-close", $(this).parent()).hide();
-                        optionstr = "<option value='0'></option>"
-                        console.log({edit: deptList})
-                        saveDeptSelet(deptList, 1);
-                        $("#deptForm")[0].reset();
-                        $("#parentId").html(optionstr);
-                        $("#deptId").val(deptId);
-                        var targetDept = deptMap[deptId];
-                        if (targetDept) {
-                            $("#parentId").val(targetDept.parentId);
-                            $("#deptName").val(targetDept.name);
-                            $("#deptseq").val(targetDept.seq);
-                            $("#deptRemark").val(targetDept.remark);
-                        }
-                    },
-                    buttons: {
-                        "更新": function (e) {
-                            e.preventDefault();
-                            updateDept(false, function (data) {
-                                $("#dialog-dept-form").dialog("close");
-                            }, function (data) {
-                                showMessage("更新部门", data.msg, false);
-                            })
-                        }
-                        ,
-                        "取消": function () {
-                            $("#dialog-dept-form").dialog("close");
-                        }
-                    }
-                })
-            })
-        }
-
-        function handleDeptSelected(deptId) {
-            if (lastClickDeptId != -1) {
-                var lastDept = $("#dept_" + lastClickDeptId + " .dd2-content:first");
-                lastDept.removeClass("btn-yellow");
-                lastDept.removeClass("no-hover");
-            }
-            var currentDept = $("#dept_" + deptId + " .dd2-content:first");
-            currentDept.addClass("btn-yellow");
-            currentDept.addClass("no-hover");
-            lastClickDeptId = deptId;
-            loadUserList(deptId)
-        }
-
-        function loadUserList(deptId) {
-            var pageSize = $("#pageSize").val();
-            var url = "/sys/user/list.json?deptId=" + deptId;
-            var pageNo = $("#userpage .pageNo").val() || 1;
-            $.ajax({
-                url: url,
-                data: {
-                    pageSize: pageSize,
-                    pageNo: pageNo
-                },
-                success: function (result) {
-                    renderUserListAndPage(result, url);
-                }
-            })
-        }
-
-        function renderUserListAndPage(result, url) {
-            if (result.ret) {
-                if (result.data.total > 0) {
-                    var rendered = Mustache.render(userListTemplte, {
-                        userList: result.data.data,
-                        "showDeptName": function () {
-                            return deptMap[this.deptId].name;
-                        },
-                        "showStatus": function () {
-                            return this.status == 1 ? "有效" : (this.status == 0 ? "无效" : "删除");
-                        },
-                        "bold":function () {
-                            return function(text, render) {
-                                var status = render(text);
-                                if (status == '有效') {
-                                    return "<span class='label label-sm label-success'>有效</span>";
-                                } else if(status == '无效') {
-                                    return "<span class='label label-sm label-warning'>无效</span>";
-                                } else {
-                                    return "<span class='label'>删除</span>";
-                                }
-                            }
-                        }
-                    });
-                    $("#userList").html(rendered);
-                    bindUserClick();
-                    $.each(result.data.data, function(i, user) {
-                        userMap[user.id] = user;
-                    })
-                }else {
-                    $("#userList").html("");
-                }
-                var pageSize = $("#pageSize").val();
-                var pageNo = $("#userPage .pageNo").val() || 1;
-                renderPage(url, result.data.total, pageNo, pageSize, result.data.total > 0 ? result.data.data.length : 0, "userPage", renderUserListAndPage);
-            }else{
-                showMessage("获取部门下用户列表", result.msg, false);
-            }
-        }
-        $(".user-add").click(function() {
-            $("#dialog-user-form").dialog({
-                model: true,
-                title: "新增用户",
-                open: function(event, ui) {
-                    $(".ui-dialog-titlebar-close", $(this).parent()).hide();
-                    optionstr = "";
-                    saveDeptSelet(deptList, 1);
-                    $("#userForm")[0].reset();
-                    $("#deptSelectId").html(optionstr);
-                },
-                buttons : {
-                    "添加": function(e) {
-                        e.preventDefault();
-                        updateUser(true, function (data) {
-                            $("#dialog-user-form").dialog("close");
-                            loadUserList(lastClickDeptId);
-                        }, function (data) {
-                            showMessage("新增用户", data.msg, false);
-                        })
-                    },
-                    "取消": function () {
-                        $("#dialog-user-form").dialog("close");
-                    }
-                }
-            });
-        });
-        function updateUser(isCreate, successCallback, failCallback) {
-            $.ajax({
-                url: isCreate ? "/sys/user/save.json" : "/sys/user/update.json",
-                data: $("#userForm").serializeArray(),
-                type: 'POST',
-                success: function(result) {
-                    if (result.ret) {
-                        loadDeptTree();
-                        if (successCallback) {
-                            successCallback(result);
-                        }
-                    } else {
-                        if (failCallback) {
-                            failCallback(result);
-                        }
-                    }
-                }
-            })
-        }
-        function bindUserClick() {
-            $(".user-edit").click(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                var userId = $(this).attr("data-id");
-                $("#dialog-user-form").dialog({
-                    model: true,
-                    title: "编辑用户",
-                    open: function(event, ui) {
-                        $(".ui-dialog-titlebar-close", $(this).parent()).hide();
-                        optionstr = "";
-                        saveDeptSelet(deptList, 1);
-                        $("#userForm")[0].reset();
-                        $("#deptSelectId").html(optionstr);
-
-                        var targetUser = userMap[userId];
-                        if (targetUser) {
-                            $("#deptSelectId").val(targetUser.deptId);
-                            $("#userName").val(targetUser.username);
-                            $("#userMail").val(targetUser.mail);
-                            $("#userTelephone").val(targetUser.telephone);
-                            $("#userStatus").val(targetUser.status);
-                            $("#userRemark").val(targetUser.remark);
-                            $("#userId").val(targetUser.id);
-                        }
-                    },
-                    buttons : {
-                        "更新": function(e) {
-                            e.preventDefault();
-                            updateUser(false, function (data) {
-                                $("#dialog-user-form").dialog("close");
-                                loadUserList(lastClickDeptId);
-                            }, function (data) {
-                                showMessage("更新用户", data.msg, false);
-                            })
-                        },
-                        "取消": function () {
-                            $("#dialog-user-form").dialog("close");
-                        }
-                    }
-                });
-            });
-        }
-        $(".dept-add").click(function () {
-            $("#dialog-dept-form").dialog({
-                model: true,
-                title: "新增部门",
-                open: function (event, ui) {
-                    $(".ui-dialog-titlebar-close", $(this).parent()).hide();
-                    optionstr = "<option value='0'></option>"
-                    saveDeptSelet(deptList, 1);
-                    $("#deptForm")[0].reset();
-                    $("#parentId").html(optionstr);
-                },
-                buttons: {
-                    "添加": function (e) {
-                        e.preventDefault();
-                        updateDept(true, function (data) {
-                            $("#dialog-dept-form").dialog("close");
-                        }, function (data) {
-                            showMessage("新增部门", data.msg, false);
-                        })
-                    },
-                    "取消": function () {
-                        $("#dialog-dept-form").dialog("close");
-                    }
-                }
-            })
+<script>
+    var deptTreeList; //缓存树形目录
+    var deptTreeMap = {};
+    var userMap = {};
+    var lastClickDeptId = -1;
+    $(document).ready(function () {
+        itemTreeCreate();
+        $("#search").on("click", function () {
+            searchUser();
         })
-
-        function saveDeptSelet(deptList, level) {
-            level = level | 0;
-            if (deptList && deptList.length > 0) {
-                $(deptList).each(function (i, dept) {
-                    deptMap[dept.id] = dept;
-                    var blank = "";
-                    if (level > 1) {
-                        for (var j = 3; j <= level; j++) {
-                            blank += "..";
-                        }
-                        blank += "L";
-                    }
-                    optionstr += Mustache.render("<option value='{{id}}'>{{name}}</option>", {
-                        id: dept.id,
-                        name: blank + dept.name
-                    });
-                    if (dept.deptDtoList && dept.deptDtoList.length > 0) {
-                        saveDeptSelet(dept.deptDtoList, level + 1);
-                    }
-                })
+        binAddUserBtn();
+        commonValidate("userForm", updateUser);
+        commonValidate("deptForm", updateDept);
+        $("#roleUserUpdate").on("click",function () {
+            updateRoleUser();
+        })
+    });
+    function addUser() {
+        $("#userForm")[0].reset();
+        $("#addUserTitle").html("添加用户");
+        $("#addDeptName").html("");
+        $("#userId").val("");
+        $("#addDdeptId").val("");
+    }
+    function updateDept() {
+        var url = (!$("#deptId").val()) ? "/sys/dept/save.json" : "/sys/dept/update.json";
+        var data = $("#deptForm").serializeArray();
+        if ($("#deptId").val()) {
+            submitAjaxForm(url, data, function (result) {
+                console.log(result)
+                itemTreeCreate();
+                $(".closeModel").click();
+            }, function (result) {
+                console.log(result)
+            });
+        } else {
+            submitAjaxForm(url, data, function (result) {
+                itemTreeCreate();
+                $(".closeModel").click();
+                console.log(result)
+            }, function (result) {
+                console.log(result)
+            });
+        }
+    }
+    function updateUser() {
+        var url = (!$("#userId").val()) ? "/sys/user/save.json" : "/sys/user/update.json";
+        var data = $("#userForm").serializeArray();
+        if ($("#userId").val()) {
+            submitAjaxForm(url, data, function (result) {
+                console.log(result)
+                $(".closeModel").click();
+                searchUser();
+            }, function (result) {
+                console.log(result)
+            });
+        } else {
+            submitAjaxForm(url, data, function (result) {
+                $(".closeModel").click();
+                console.log(result)
+            }, function (result) {
+                console.log(result)
+            });
+        }
+    }
+    function binAddUserBtn() {
+        $("#addUserBtn").on("click", function () {
+            if ($(this).html().trim() == "选择部门") {
+                $("#addUserDeptTree").show();
+                $(this).html("收起部门");
+            } else {
+                $("#addUserDeptTree").hide();
+                $(this).html("选择部门");
+            }
+        })
+        $("#addDeptBtn").on("click", function () {
+            if ($(this).html().trim() == "选择部门") {
+                $("#addDeptTree").show();
+                $(this).html("收起部门");
+            } else {
+                $("#addDeptTree").hide();
+                $(this).html("选择部门");
+            }
+        })
+        $("#resetDeptBtn").on("click", function () {
+            $("#parentId").val("0");
+            $("#deptName").html("");
+        })
+    }
+    function searchUser() {
+        var keyword = $("#keyword").val();
+        loadUserList(lastClickDeptId, keyword);
+    }
+    function itemTreeCreate() {
+        var url = "/sys/dept/tree.json";
+        loadDpetTree(url);
+    }
+    var nesBindEvent = function () {
+        $("#deptTree .dd-handle").click(function () {
+            var deptId = $(this).parent().attr("data-id");
+            handleDeptSelected(deptId, this);
+        })
+    }
+    var nesBindEventAddUser = function () {
+        $("#addUserDeptTree .dd-handle").click(function () {
+            var deptId = $(this).parent().attr("data-id");
+            $("#addDeptName").html(deptTreeMap[deptId].name);
+            $("#addDdeptId").val(deptId);
+        })
+    }
+    var nesBindEventAddDept = function () {
+        $("#addDeptTree .dd-handle").click(function () {
+            var deptId = $(this).parent().attr("data-id");
+            $("#deptName").html(deptTreeMap[deptId].name);
+            $("#parentId").val(deptId);
+        })
+    }
+    function handleDeptSelected(deptId, ele) {
+        if (deptId == lastClickDeptId) {
+            $(ele).removeClass("nestable2Selected").addClass("dd-handle");
+            lastClickDeptId = -1;
+            loadUserList(lastClickDeptId)
+            return false;
+        } else {
+            if (lastClickDeptId != -1 && deptId != lastClickDeptId) {
+                var lastDept = $("#dept_" + lastClickDeptId + " .dd-content:first");
+                lastDept.removeClass("nestable2Selected").addClass("dd-handle");
             }
         }
-
-        function updateDept(isCreate, successCallback, failCallback) {
-            $.ajax({
-                        url: isCreate ? "/sys/dept/save.json" : "/sys/dept/update.json",
-                        data: $("#deptForm").serializeArray(),
-                        type: "post",
-                        success: function (result) {
-                            if (result.ret) {
-                                loadDeptTree();
-                                if (successCallback) {
-                                    successCallback(result);
-                                }
-                            }
-                            else {
-                                if (failCallback) {
-                                    failCallback(result);
-                                }
-                            }
-                        }
-                    }
-            )
+        lastClickDeptId = deptId;
+        $(ele).removeClass("dd-handle").addClass("nestable2Selected");
+        loadUserList(lastClickDeptId)
+    }
+    function loadUserList(deptId, keyword) {
+        var url = "/sys/user/list.json";
+        var data = {
+            deptId: deptId,
+            keyword: keyword
         }
-    })
+        var listJson = {
+            "userList": "",
+            "showStatus": function () {
+                return this.status == 1 ? "有效" : (this.status == 0 ? "无效" : "冻结");
+            },
+            "statusClass": function () {
+                return this.status == 1 ? "label-primary" : this.status == 0 ? "label-warning" : "label-danger";
+            },
+            "showDeptName": function () {
+                return deptTreeMap[this.deptId].name;
+            }
+        };
+        var listTemplate = $("#listTemplate").html();
+        var successCallback = function (result) {
+            createMustache(listJson, result, listTemplate, $("#listTable"));
+            createListMap(result, userMap);
+            $("#total").html(result.data.total);
+            bindEditUserClik();
+            formatData();
+        }
+        getTableList(url, data, false, successCallback);
+    }
+    function bindEditUserClik() {
+        $(".editUser").on("click", function () {
+            $("#addUserTitle").html("编辑用户");
+            var targetUser = userMap[$(this).attr("data-Id")];
+            if (targetUser) {
+                $("#addDdeptId").val(targetUser.deptId);
+                $("#addDeptName").html(deptTreeMap[targetUser.deptId].name);
+                $("#addUserName").val(targetUser.username);
+                $("#addUserMail").val(targetUser.mail);
+                $("#addUserTelephone").val(targetUser.telephone);
+                $("#addUserStatus").val(targetUser.status);
+                $("#addUserRemark").val(targetUser.remark);
+                $("#userId").val(targetUser.id);
+            }
+        })
+        $(".userRole").on("click",function () {
+            createUserRoleTree($(this).attr("data-Id"));
+        })
+    }
+    function bindEditDeptClik() {
+        $(".editDept").on("click", function (e) {
+            $("#addDeptTitle").html("编辑部门");
+            var targetDept = deptTreeMap[$(this).attr("data-id")];
+            if (targetDept) {
+                $("#deptId").val(targetDept.id);
+                $("#parentId").val(targetDept.parentId);
+                $("#deptName").html(targetDept.parentId != 0 ? deptTreeMap[targetDept.parentId].name : "");
+                $("#addDeptDeptName").val(targetDept.name);
+                $("#addDeptSeq").val(targetDept.seq);
+                $("#addDeptRemark").val(targetDept.remark);
+            }
+        })
+    }
+    function loadDpetTree(url) {
+        $.ajax({
+            url: path + url,
+            success: function (result) {
+                debugger;
+                deptTreeList = result.data;
+                var a = deptTreeList;
+                var deptListTemplate = $("#deptListTemplate").html();
+                var addUserDeptListTemplate = $("#addUserDeptListTemplate").html();
+                var addDeptListTemplate = $("#addDeptListTemplate").html();
+                createMustacheTree(deptTreeList, addDeptListTemplate, {addDeptTreeList: deptTreeList}, $("#addDeptTree"), "#addDept_", nesBindEventAddDept);
+                createMustacheTree(a, addUserDeptListTemplate, {addUserDeptTreeList: a}, $("#addUserDeptTree"), "#addUserDept_", nesBindEventAddUser);
+                createMustacheTree(deptTreeList, deptListTemplate, {deptTreeList: deptTreeList}, $("#deptTree"), "#dept_", nesBindEvent);
+                loadUserList(lastClickDeptId);
+                bindEditDeptClik();
+            }
+        })
+    }
+    function createMustacheTree(treeList, template, listData, ele, idStr, bindEvent) {
+        debugger;
+        var ren = Mustache.render(template, listData);
+        $(ele).html(ren);
+        recursiveRender(treeList, template, idStr, listData);
+        nestableTree(bindEvent, ele);
+    }
+    function recursiveRender(deptTreeList, deptListTemplate, idStr, deptTreeListData) {
+        if (deptTreeList && deptTreeList.length > 0) {
+            $(deptTreeList).each(function (i, item) {
+                deptTreeMap[item.id] = item;
+                if (item.deptDtoList && item.deptDtoList.length > 0) {
+                    deptTreeListData[getFirstAttr(deptTreeListData)] = item.deptDtoList;
+                    var rendered = Mustache.render(deptListTemplate, deptTreeListData);
+                    $(idStr + item.id).append(rendered);
+                    recursiveRender(item.deptDtoList, deptListTemplate, idStr, deptTreeListData);
+                }
+            })
+        }
+    }
 
+
+
+
+
+
+
+
+    // zTree
+    <!-- 树结构相关 开始 -->
+    var zTreeObj = [];
+    var rolePrefix = 'u_';
+    var nodeMap = {};
+
+    var setting = {
+        check: {
+            enable: true,
+            chkDisabledInherit: true,
+            chkboxType: {"Y": "ps", "N": "ps"}, //auto check 父节点 子节点
+            autoCheckTrigger: true
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                rootPId: 0
+            }
+        },
+        callback: {
+            onClick: onClickTreeNode
+        }
+    };
+
+    function onClickTreeNode(e, treeId, treeNode) { // 绑定单击事件
+        var zTree = $.fn.zTree.getZTreeObj("roleUserTree");
+        zTree.expandNode(treeNode);
+    }
+
+    function createUserRoleTree(userId) {
+        if (userId == -1) {
+            return;
+        }
+        $.ajax({
+            url: path+"/sys/role/roleUserTree.json",
+            data : {
+                userId: userId
+            },
+            type: 'POST',
+            success: function (result) {
+                if (result.ret) {
+                    renderRoleTree(result.data);
+                    $("#updateUserRoleId").val(userId);
+                } else {
+
+                }
+            }
+        });
+    }
+    function renderRoleTree(roleList) {
+        zTreeObj = [];
+        recursivePrepareTreeData(roleList);
+        for(var key in nodeMap) {
+            zTreeObj.push(nodeMap[key]);
+        }
+        $.fn.zTree.init($("#roleUserTree"), setting, zTreeObj);
+    }
+
+    function recursivePrepareTreeData(roleList) {
+        // prepare nodeMap
+        if (roleList && roleList.length > 0) {
+            $(roleList).each(function(i, role) {
+                var hasChecked = false;
+                        zTreeObj.push({
+                            id: rolePrefix + role.id,
+                            pId: 0,
+                            name: role.name,
+                            chkDisabled: !role.hasAcl,
+                            checked: role.checked,
+                            dataId: role.id
+                        });
+            });
+        }
+    }
+    function updateRoleUser() {
+        var userId= $("#updateUserRoleId").val();
+        var url = "/sys/role/changeUserRoles.json";
+        var data = {
+            userId:userId,
+            roleIds: getZTreeSelectedId("roleUserTree","u_")
+        };
+        submitAjaxForm(url, data, function (result) {
+            $(".closeModel").click();
+        }, function (result) {
+
+        });
+    }
+    function getZTreeSelectedId(ele,prefix) {
+        var treeObj = $.fn.zTree.getZTreeObj(ele);
+        var nodes = treeObj.getCheckedNodes(true);
+        var v = "";
+        for(var i = 0; i < nodes.length; i++) {
+            if(nodes[i].id.startsWith(prefix)) {
+                v += "," + nodes[i].dataId;
+            }
+        }
+        return v.length > 0 ? v.substring(1): v;
+    }
 </script>
+
 </body>
+
 </html>
