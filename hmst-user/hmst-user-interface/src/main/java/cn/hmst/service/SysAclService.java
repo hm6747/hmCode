@@ -11,5 +11,5 @@ import cn.hmst.query.PageResult;
 public interface SysAclService {
     public void save(AclParam param);
     public void update(AclParam para);
-    public PageResult<SysAcl> getPageByAclModuleId(int aclModuleId, PageQuery page);
+    public PageResult<SysAcl> getPageByAclModuleId(int aclModuleId, PageQuery page,String keyword);
 }

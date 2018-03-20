@@ -8,10 +8,12 @@ import cn.hmst.pojo.SysAcl;
 import cn.hmst.query.PageQuery;
 import cn.hmst.query.PageResult;
 import cn.hmst.service.SysAclService;
+import cn.hmst.service.SysLogService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -21,9 +23,8 @@ public class SysAclServiceImpl implements SysAclService {
 
     @Autowired
     private SysAclMapper sysAclMapper;
-
-    /*    @Resource
-        private SysLogService sysLogService;*/
+          @Resource
+        private SysLogService sysLogService;
     @Override
     public void save(AclParam param) {
         BeanValidator.check(param);
@@ -37,9 +38,7 @@ public class SysAclServiceImpl implements SysAclService {
         acl.setOperatorTime(new Date());
         acl.setOperatorIp("127.0.0.1");
         sysAclMapper.insertSelective(acl);
-/*
-        sysLogService.saveAclLog(null, acl);
-*/
+        sysLogService.saveAclLog(null, acl,0);
     }
 
     @Override
@@ -58,9 +57,7 @@ public class SysAclServiceImpl implements SysAclService {
         after.setOperatorIp("127.0.0.1");
 
         sysAclMapper.updateByPrimaryKeySelective(after);
-/*
-        sysLogService.saveAclLog(before, after);
-*/
+        sysLogService.saveAclLog(before, after,0);
     }
 
     public boolean checkExist(int aclModuleId, String name, Integer id) {
@@ -73,11 +70,11 @@ public class SysAclServiceImpl implements SysAclService {
     }
 
     @Override
-    public PageResult<SysAcl> getPageByAclModuleId(int aclModuleId, PageQuery page) {
+    public PageResult<SysAcl> getPageByAclModuleId(int aclModuleId, PageQuery page,String keyword) {
         BeanValidator.check(page);
         int count = sysAclMapper.countByAclModuleId(aclModuleId);
         if (count > 0) {
-            List<SysAcl> aclList = sysAclMapper.getPageByAclModuleId(aclModuleId, page);
+            List<SysAcl> aclList = sysAclMapper.getPageByAclModuleId(aclModuleId, page,keyword);
             return PageResult.<SysAcl>builder().data(aclList).total(count).build();
         }
         return PageResult.<SysAcl>builder().build();

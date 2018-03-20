@@ -2,6 +2,7 @@ package cn.hmst.dao;
 
 import cn.hmst.pojo.SysRole;
 import cn.hmst.pojo.SysRoleExample;
+import cn.hmst.query.PageQuery;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -94,9 +95,9 @@ public interface SysRoleMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysRole record);
-    List<SysRole> getAll();
+    List<SysRole> getAll(@Param("keyword")String keyword, @Param("page")PageQuery pageQuery);
 
     int countByName(@Param("name") String name, @Param("id") Integer id);
-
+    int countByNameAndId(@Param("name") String name, @Param("id") Integer id);
     List<SysRole> getByIdList(@Param("idList") List<Integer> idList);
 }

@@ -17,7 +17,6 @@
     <!-- 通知 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!-- 传播行为 -->
             <tx:method name="save*" propagation="REQUIRED" />
             <tx:method name="insert*" propagation="REQUIRED" />
             <tx:method name="add*" propagation="REQUIRED" />
@@ -30,7 +29,7 @@
         </tx:attributes>
     </tx:advice>
     <!-- 切面 -->
-    <aop:config>
+ <aop:config>
         <aop:advisor advice-ref="txAdvice"
                      pointcut="execution(* cn.hmst.service..*.*(..))" />
     </aop:config>

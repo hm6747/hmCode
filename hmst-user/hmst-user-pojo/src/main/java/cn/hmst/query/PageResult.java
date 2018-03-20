@@ -21,4 +21,8 @@ public class PageResult<T> implements Serializable{
     private List<T> data = Lists.newArrayList();
 
     private int total;
+
+    private int pageSize;
+
+    private int pageNum;
 }

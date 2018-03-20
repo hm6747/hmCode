@@ -8,6 +8,9 @@ import cn.hmst.dao.SysRoleUserMapper;
 import cn.hmst.dao.SysUserMapper;
 import cn.hmst.param.RoleParam;
 import cn.hmst.pojo.SysRole;
+import cn.hmst.query.PageQuery;
+import cn.hmst.query.PageResult;
+import cn.hmst.service.SysLogService;
 import cn.hmst.service.SysRoleService;
 import com.google.common.base.Preconditions;
 import org.springframework.stereotype.Service;
@@ -27,8 +30,8 @@ public class SysRoleServiceImpl implements SysRoleService{
     private SysRoleAclMapper sysRoleAclMapper;
     @Resource
     private SysUserMapper sysUserMapper;
-  /*  @Resource
-    private SysLogService sysLogService;*/
+    @Resource
+    private SysLogService sysLogService;
 
     @Override
     public void save(RoleParam param) {
@@ -42,9 +45,7 @@ public class SysRoleServiceImpl implements SysRoleService{
         role.setOperatorIp("127.0.0.1");
         role.setOperatorTime(new Date());
         sysRoleMapper.insertSelective(role);
-/*
-        sysLogService.saveRoleLog(null, role);
-*/
+        sysLogService.saveRoleLog(null, role,0);
     }
 
     @Override
@@ -62,27 +63,33 @@ public class SysRoleServiceImpl implements SysRoleService{
         after.setOperatorIp("127.0.0.1");
         after.setOperatorTime(new Date());
         sysRoleMapper.updateByPrimaryKeySelective(after);
-/*
-        sysLogService.saveRoleLog(before, after);
-*/
+        sysLogService.saveRoleLog(before, after,0);
     }
 
     @Override
-    public List<SysRole> getAll() {
-        return sysRoleMapper.getAll();
+    public PageResult<SysRole> getAll(String keyword, PageQuery pageQuery) {
+        BeanValidator.check(pageQuery);
+        int count = sysRoleMapper.countByName(keyword,null);
+        if (count > 0) {
+            List<SysRole> list = sysRoleMapper.getAll(keyword,pageQuery);
+            return PageResult.<SysRole>builder().total(count).data(list).build();
+        }
+        return PageResult.<SysRole>builder().build();
     }
 
     private boolean checkExist(String name, Integer id) {
-        return sysRoleMapper.countByName(name, id) > 0;
+
+        return sysRoleMapper.countByNameAndId(name, id) > 0;
     }
-/*
-    public List<SysRole> getRoleListByUserId(int userId) {
+
+   /* public List<SysRole> getRoleListByUserId(int userId) {
         List<Integer> roleIdList = sysRoleUserMapper.getRoleIdListByUserId(userId);
         if (CollectionUtils.isEmpty(roleIdList)) {
             return Lists.newArrayList();
         }
         return sysRoleMapper.getByIdList(roleIdList);
     }
+
 
     @Override
     public List<SysRole> getRoleListByAclId(int aclId) {

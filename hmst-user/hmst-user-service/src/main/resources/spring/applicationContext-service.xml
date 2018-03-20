@@ -14,11 +14,11 @@
     <context:component-scan base-package="cn.hmst.impl"/>
     <!-- 使用dubbo发布服务 -->
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="hmst-user" />
+    <dubbo:application name="hmst-user"/>
     <dubbo:registry protocol="zookeeper"
-                    address="120.79.53.121:7007" />
+                    address="120.79.53.121:7011"/>
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20885" />
+    <dubbo:protocol name="dubbo" port="20882" />
     <!-- 声明需要暴露的服务接口 -->
     <bean id="sysDeptService" class="cn.hmst.impl.SysDeptServiceImpl" />
     <bean id="sysTreesService" class="cn.hmst.impl.SysTreesServiceImpl" />
@@ -26,10 +26,16 @@
     <bean id="sysAclModuleService" class="cn.hmst.impl.SysAclModuleServiceImpl" />
     <bean id="sysAclService" class="cn.hmst.impl.SysAclServiceImpl" />
     <bean id="sysRoleService" class="cn.hmst.impl.SysRoleServiceImpl" />
+    <bean id="sysRoleAclService" class="cn.hmst.impl.SysRoleAclServiceImpl" />
+    <bean id="sysRoleUserService" class="cn.hmst.impl.SysRoleUserServiceImpl" />
+    <bean id="sysLogService" class="cn.hmst.impl.SysLogServiceImpl" />
     <dubbo:service interface="cn.hmst.service.SysDeptService" ref="sysDeptServiceImpl" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysTreesService" ref="sysTreesServiceImpl" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysUserService" ref="sysUserService" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysAclModuleService" ref="sysAclModuleService" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysAclService" ref="sysAclService" timeout="600000"/>
     <dubbo:service interface="cn.hmst.service.SysRoleService" ref="sysRoleService" timeout="600000"/>
+    <dubbo:service interface="cn.hmst.service.SysRoleAclService" ref="sysRoleAclService" timeout="600000"/>
+    <dubbo:service interface="cn.hmst.service.SysRoleUserService" ref="sysRoleUserService" timeout="600000"/>
+    <dubbo:service interface="cn.hmst.service.SysLogService" ref="sysLogService" timeout="600000"/>
 </beans>

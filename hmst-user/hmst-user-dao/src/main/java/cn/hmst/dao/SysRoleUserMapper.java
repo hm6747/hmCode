@@ -100,6 +100,8 @@ public interface SysRoleUserMapper {
 
     void deleteByRoleId(@Param("roleId") int roleId);
 
+    void deleteByUserId(@Param("userId") int userId);
+
     void batchInsert(@Param("roleUserList") List<SysRoleUser> roleUserList);
 
     List<Integer> getUserIdListByRoleIdList(@Param("roleIdList") List<Integer> roleIdList);

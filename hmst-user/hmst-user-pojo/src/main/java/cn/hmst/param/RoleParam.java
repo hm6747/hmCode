@@ -23,12 +23,12 @@ public class RoleParam implements Serializable{
     private String name;
 
     @Min(value = 1, message = "角色类型不合法")
-    @Max(value = 2, message = "角色类型不合法")
-    private Integer type = 1;
+    @Max(value = 3, message = "角色类型不合法")
+    private Integer type = 2;
 
     @NotNull(message = "角色状态不可以为空")
     @Min(value = 0, message = "角色状态不合法")
-    @Max(value = 1, message = "角色状态不合法")
+    @Max(value = 2, message = "角色状态不合法")
     private Integer status;
 
     @Length(min = 0, max = 200, message = "角色备注长度需要在200个字符以内")

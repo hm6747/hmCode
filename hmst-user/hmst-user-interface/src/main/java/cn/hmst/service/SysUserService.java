@@ -12,5 +12,5 @@ public interface SysUserService {
     public void save(UserParam param);
     public void update(UserParam param);
     public SysUser findByKeyword(String username);
-    public PageResult<SysUser> getPageByDeptId(int deptId, PageQuery page);
+    public PageResult<SysUser> getPageByDeptId(int deptId, PageQuery page,String keyword);
     }

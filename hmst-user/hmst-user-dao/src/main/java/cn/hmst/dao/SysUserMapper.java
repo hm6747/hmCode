@@ -97,7 +97,9 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
     SysUser findByKeword(String keyword);
     int conuntByMail(@Param("mail")String mail,@Param("id")Integer id);
-    int conuntByTelphone(@Param("telephone")String telephone87,@Param("id")Integer id);
+    int conuntByTelphone(@Param("telephone")String telephone,@Param("id")Integer id);
     int conuntByDeptId(@Param("deptId")Integer deptId);
-    List<SysUser> getPageByDeptId(@Param("deptId")int deptId, @Param("page") PageQuery page);
+    List<SysUser> getPageByDeptId(@Param("deptId")int deptId, @Param("page") PageQuery page,@Param("keyword")String keyword);
+    List<SysUser> getByIdList(@Param("idList") List<Integer> idList);
+    List<SysUser> getAll();
 }

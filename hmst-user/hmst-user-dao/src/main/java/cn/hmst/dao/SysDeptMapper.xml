@@ -359,7 +359,7 @@
         select
         <include refid="Base_Column_List"/>
         from sys_dept
-        WHERE level LIKE #{level} || ".%"
+        WHERE level LIKE  concat(#{level},"%")
     </select>
     <update id="batchUpdateLevel" parameterType="map">
         <foreach collection="sysDeptList" item="sysDept" separator=";">

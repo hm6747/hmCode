@@ -330,20 +330,41 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getAll" resultMap="BaseResultMap">
+  <select id="getAll" resultMap="BaseResultMap" resultType="map">
     SELECT <include refid="Base_Column_List" />
     FROM sys_role
+    WHERE TRUE
+    <if test="keyword != null and keyword != ''" >
+      AND name like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%' )
+    </if>
+    ORDER BY operator_time Desc
+    <if test="page != null" >
+      limit #{page.offset}, #{page.pageSize}
+    </if>
   </select>
 
   <select id="countByName" parameterType="map" resultType="int">
     SELECT count(1)
     FROM sys_role
-    WHERE name = #{name}
+    WHERE TRUE
+    <if test="name != null and name != ''" >
+      AND name like CONCAT('%',#{name,jdbcType=VARCHAR},'%' )
+    </if>
     <if test="id != null">
       AND id != #{id}
     </if>
   </select>
-
+  <select id="countByNameAndId" parameterType="map" resultType="int">
+    SELECT count(1)
+    FROM sys_role
+    WHERE TRUE
+    <if test="name != null and name != ''" >
+      AND name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="id != null">
+      AND id != #{id}
+    </if>
+  </select>
   <select id="getByIdList" parameterType="map" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List" />
     FROM sys_role

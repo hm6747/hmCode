@@ -1,10 +1,8 @@
 package cn.hmst.impl;
 
-import cn.hmst.dao.SysAclMapper;
-import cn.hmst.dao.SysRoleAclMapper;
-import cn.hmst.dao.SysRoleUserMapper;
-import cn.hmst.param.RequestHolder;
+import cn.hmst.dao.*;
 import cn.hmst.pojo.SysAcl;
+import cn.hmst.pojo.SysRole;
 import cn.hmst.pojo.SysUser;
 import cn.hmst.service.SysCoreService;
 import com.google.common.collect.Lists;
@@ -12,9 +10,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class SysCoreServiceImpl implements SysCoreService{
@@ -22,16 +18,23 @@ public class SysCoreServiceImpl implements SysCoreService{
     @Resource
     private SysAclMapper sysAclMapper;
     @Resource
+    private SysRoleMapper sysRoleMapper;
+    @Resource
     private SysRoleUserMapper sysRoleUserMapper;
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
+    @Resource
+    private SysUserMapper sysUserMapper;
 /*    @Resource
     private SysCacheService sysCacheService;*/
 
     @Override
-    public List<SysAcl> getCurrentUserAclList() {
-        int userId = RequestHolder.getCurrentUser().getId();
+    public List<SysAcl> getCurrentUserAclList(int userId) {
         return getUserAclList(userId);
+    }
+    @Override
+    public List<SysRole> getCurrentUserRoleList(int userId) {
+        return getUserRoleList(userId);
     }
     @Override
     public List<SysAcl> getRoleAclList(int roleId) {
@@ -43,7 +46,7 @@ public class SysCoreServiceImpl implements SysCoreService{
     }
     @Override
     public List<SysAcl> getUserAclList(int userId) {
-        if (isSuperAdmin()) {
+        if (isSuperAdmin(userId)) {
             return sysAclMapper.getAll();
         }
         List<Integer> userRoleIdList = sysRoleUserMapper.getRoleIdListByUserId(userId);
@@ -57,17 +60,29 @@ public class SysCoreServiceImpl implements SysCoreService{
         return sysAclMapper.getByIdList(userAclIdList);
     }
 
-    public boolean isSuperAdmin() {
+    @Override
+    public List<SysRole> getUserRoleList(int userId) {
+        if (isSuperAdmin(userId)) {
+            return sysRoleMapper.getAll(null,null);
+        }
+        List<Integer> userRoleIdList = sysRoleUserMapper.getRoleIdListByUserId(userId);
+        if (CollectionUtils.isEmpty(userRoleIdList)) {
+            return Lists.newArrayList();
+        }
+        return sysRoleMapper.getByIdList(userRoleIdList);
+    }
+
+    public boolean isSuperAdmin(int id) {
         // 这里是我自己定义了一个假的超级管理员规则，实际中要根据项目进行修改
         // 可以是配置文件获取，可以指定某个用户，也可以指定某个角色
-        SysUser sysUser = RequestHolder.getCurrentUser();
-        if (sysUser.getmail().contains("admin")) {
+        SysUser sysUser = sysUserMapper.selectByPrimaryKey(id);
+        if (sysUser.getUsername().equals("黄铭")) {
             return true;
         }
         return false;
     }
 
-    public boolean hasUrlAcl(String url) {
+   /* public boolean hasUrlAcl(String url) {
         if (isSuperAdmin()) {
             return true;
         }
@@ -75,7 +90,7 @@ public class SysCoreServiceImpl implements SysCoreService{
         if (CollectionUtils.isEmpty(aclList)) {
             return true;
         }
-        List<SysAcl> userAclList = Lists.newArrayList();/* getCurrentUserAclListFromCache();*/
+        List<SysAcl> userAclList = Lists.newArrayList();*//* getCurrentUserAclListFromCache();*//*
         Set<Integer> userAclIdSet = new HashSet<>();
         for (SysAcl acl:
                 userAclList) {
@@ -97,7 +112,7 @@ public class SysCoreServiceImpl implements SysCoreService{
             return true;
         }
         return false;
-    }
+    }*/
 
  /*   public List<SysAcl> getCurrentUserAclListFromCache() {
         int userId = RequestHolder.getCurrentUser().getId();

@@ -1,10 +1,13 @@
 package cn.hmst.dao;
 
+import cn.hmst.dto.SearchLogDto;
 import cn.hmst.pojo.SysLog;
 import cn.hmst.pojo.SysLogExample;
 import cn.hmst.pojo.SysLogWithBLOBs;
-import java.util.List;
+import cn.hmst.query.PageQuery;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SysLogMapper {
     /**
@@ -118,4 +121,6 @@ public interface SysLogMapper {
      * @mbggenerated Thu Dec 21 23:20:45 CST 2017
      */
     int updateByPrimaryKey(SysLog record);
+    int countBySearchDto(@Param("dto") SearchLogDto dto);
+    List<SysLogWithBLOBs> getPageListBySearchDto(@Param("dto") SearchLogDto dto, @Param("page") PageQuery page);
 }

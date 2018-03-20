@@ -7,12 +7,14 @@ import cn.hmst.dao.SysDeptMapper;
 import cn.hmst.param.DeptParam;
 import cn.hmst.pojo.SysDept;
 import cn.hmst.service.SysDeptService;
+import cn.hmst.service.SysLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +27,8 @@ import java.util.List;
 public class SysDeptServiceImpl implements SysDeptService {
     @Autowired
     private SysDeptMapper sysDeptMapper;
-
+    @Resource
+    private SysLogService sysLogService;
     @Override
     public void save(DeptParam param) {
         BeanValidator.check(param);
@@ -39,6 +42,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         sysDept.setOperatorIp("127.0.0.1");
         sysDept.setOperatorTime(new Date());
         sysDeptMapper.insertSelective(sysDept);
+        sysLogService.saveDeptLog(null,sysDept,0);
     }
 
     @Override
@@ -62,7 +66,7 @@ public class SysDeptServiceImpl implements SysDeptService {
         String newLevelPrefix = after.getLevel();
         String oldLevelPrefix = before.getLevel();
         if (!after.getLevel().equals(before.getLevel())) {
-            List<SysDept> deptList = sysDeptMapper.getChildListByLevel(before.getLevel());
+            List<SysDept> deptList = sysDeptMapper.getChildListByLevel(before.getLevel()+"."+before.getId());
             if (CollectionUtils.isNotEmpty(deptList)) {
                 for (SysDept dept : deptList) {
                     String level = dept.getLevel();
@@ -75,6 +79,7 @@ public class SysDeptServiceImpl implements SysDeptService {
             }
         }
         sysDeptMapper.updateByPrimaryKey(after);
+        sysLogService.saveDeptLog(before,after,0);
     }
 
     private boolean checkExist(Integer parentId, String deptName, Integer deptId) {

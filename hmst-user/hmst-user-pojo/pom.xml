@@ -9,7 +9,7 @@
     <groupId>hmst</groupId>
     <artifactId>hmst-user-pojo</artifactId>
     <packaging>jar</packaging>
-
+    <version>1.0-SNAPSHOT</version>
     <name>hmst-user-pojo</name>
     <url>http://maven.apache.org</url>
 

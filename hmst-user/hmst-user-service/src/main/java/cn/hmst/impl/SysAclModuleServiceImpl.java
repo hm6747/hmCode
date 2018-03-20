@@ -8,12 +8,14 @@ import cn.hmst.dao.SysAclModuleMapper;
 import cn.hmst.param.AclModuleParam;
 import cn.hmst.pojo.SysAclModule;
 import cn.hmst.service.SysAclModuleService;
+import cn.hmst.service.SysLogService;
 import com.google.common.base.Preconditions;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +25,8 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
     private SysAclModuleMapper sysAclModuleMapper;
     @Autowired
     private SysAclMapper sysAclMapper;
-   /* @Resource
-    private SysLogService sysLogService;*/
+    @Resource
+    private SysLogService sysLogService;
 
 
     @Override
@@ -40,9 +42,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
         aclModule.setOperatorIp("127.0.0.1");
         aclModule.setOperatorTime(new Date());
         sysAclModuleMapper.insertSelective(aclModule);
-/*
-        sysLogService.saveAclModuleLog(null, aclModule);
-*/
+        sysLogService.saveAclModuleLog(null, aclModule,0);
     }
 
     @Override
@@ -62,9 +62,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
         after.setOperatorTime(new Date());
 
         updateWithChild(before, after);
-/*
-        sysLogService.saveAclModuleLog(before, after);
-*/
+        sysLogService.saveAclModuleLog(before, after,0);
     }
 
   @Transactional

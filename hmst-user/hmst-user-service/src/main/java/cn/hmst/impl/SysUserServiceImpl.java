@@ -4,11 +4,11 @@ import cn.hmst.common.exception.ParamException;
 import cn.hmst.common.util.BeanValidator;
 import cn.hmst.common.util.MD5Util;
 import cn.hmst.dao.SysUserMapper;
-import cn.hmst.param.RequestHolder;
 import cn.hmst.param.UserParam;
 import cn.hmst.pojo.SysUser;
 import cn.hmst.query.PageQuery;
 import cn.hmst.query.PageResult;
+import cn.hmst.service.SysLogService;
 import cn.hmst.service.SysUserService;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,8 @@ import java.util.List;
 public class SysUserServiceImpl  implements SysUserService{
     @Autowired
     private SysUserMapper sysUserMapper;
-
+    @Autowired
+    private SysLogService sysLogService;
     @Override
     public void save(UserParam param) {
         BeanValidator.check(param);
@@ -39,9 +40,10 @@ public class SysUserServiceImpl  implements SysUserService{
         SysUser user = SysUser.builder().username(param.getUsername()).telephone(param.getTelephone()).mail(param.getMail())
                 .password(encryptedPassword).deptId(param.getDeptId()).status(param.getStatus()).remark(param.getRemark()).build();
         user.setOperatorTime(new Date());
-        user.setOperator(RequestHolder.getCurrentUser().getUsername());
+        user.setOperator("黄铭");
         user.setOperatorIp("127.0.0.1");
         sysUserMapper.insertSelective(user);
+        sysLogService.saveUserLog(null,user,0);
     }
 
     public void update(UserParam param){
@@ -57,10 +59,10 @@ public class SysUserServiceImpl  implements SysUserService{
         SysUser after = SysUser.builder().id(param.getId()).username(param.getUsername()).telephone(param.getTelephone()).mail(param.getMail())
                 .deptId(param.getDeptId()).status(param.getStatus()).remark(param.getRemark()).build();
         after.setOperatorTime(new Date());
-        System.out.println(RequestHolder.getCurrentUser());
-        after.setOperator(RequestHolder.getCurrentUser().getUsername());
+        after.setOperator("黄铭");
         after.setOperatorIp("127.0.0.1");
         sysUserMapper.updateByPrimaryKeySelective(after);
+        sysLogService.saveUserLog(before,after,0);
     }
 
     public boolean checkEmailExist(String mail,Integer userId){
@@ -76,11 +78,11 @@ public class SysUserServiceImpl  implements SysUserService{
     }
 
     @Override
-    public PageResult<SysUser> getPageByDeptId(int deptId, PageQuery page) {
+    public PageResult<SysUser> getPageByDeptId(int deptId, PageQuery page,String keyword) {
         BeanValidator.check(page);
         int count = sysUserMapper.conuntByDeptId(deptId);
         if (count > 0) {
-            List<SysUser> list = sysUserMapper.getPageByDeptId(deptId, page);
+            List<SysUser> list = sysUserMapper.getPageByDeptId(deptId, page,keyword);
             return PageResult.<SysUser>builder().total(count).data(list).build();
         }
         return PageResult.<SysUser>builder().build();

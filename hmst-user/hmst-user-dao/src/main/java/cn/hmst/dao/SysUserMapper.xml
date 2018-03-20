@@ -404,13 +404,37 @@
   <select id="conuntByDeptId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     SELECT COUNT(1)
     FROM sys_user
-    WHERE dept_id=#{deptId}
+    <if test="deptId != null and deptId != '' and deptId > 0" >
+      WHERE dept_id=#{deptId}
+    </if>
   </select>
   <select id="getPageByDeptId" parameterType="map" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List" />
     FROM sys_user
-    WHERE dept_id = #{deptId}
+    WHERE TRUE
+    <if test="deptId != null and deptId != '' and deptId > 0" >
+      AND dept_id = #{deptId}
+    </if>
+    <if test="keyword != null and keyword != ''" >
+      AND (username like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%' )
+      OR
+      telephone like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%' )
+      OR mail like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%' ))
+    </if>
     ORDER BY username ASC
     LIMIT #{page.offset}, #{page.pageSize}
+  </select>
+  <select id="getByIdList" parameterType="map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE id IN
+    <foreach collection="idList" item="id" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM sys_user
   </select>
 </mapper>

@@ -408,13 +408,21 @@
   <select id="countByAclModuleId" parameterType="map" resultType="int">
     SELECT count(1)
     FROM sys_acl
-    WHERE acl_module_id = #{aclModuleId}
+    <if test="aclModuleId != null and aclModuleId != '' and aclModuleId > 0" >
+      WHERE acl_module_id = #{aclModuleId}
+    </if>
   </select>
 
   <select id="getPageByAclModuleId" parameterType="map" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List" />
     FROM sys_acl
-    WHERE acl_module_id = #{aclModuleId}
+    WHERE TRUE
+    <if test="aclModuleId != null  and aclModuleId > 0" >
+      AND acl_module_id = #{aclModuleId}
+    </if>
+    <if test="keyword != null and keyword != ''" >
+      AND (name like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%' )
+    </if>
     ORDER BY seq ASC, name ASC
     limit #{page.offset}, #{page.pageSize}
   </select>
