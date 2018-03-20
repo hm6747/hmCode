@@ -19,19 +19,6 @@
         <module>hmst-manager-pojo</module>
         <module>hmst-manager-interface</module>
     </modules>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <configuration>
-                    <port>8080</port>
-                    <path>/</path>
-                    <ignorePackaging>true</ignorePackaging>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
