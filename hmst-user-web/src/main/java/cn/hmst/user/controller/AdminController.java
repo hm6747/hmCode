@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by hm on 2017/12/25.
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/login")
 public class AdminController {
 
     @RequestMapping("/login.page")

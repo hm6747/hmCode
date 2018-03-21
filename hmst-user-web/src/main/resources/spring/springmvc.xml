@@ -20,11 +20,6 @@
 
     <!-- 启动包扫描功能 -->
     <context:component-scan base-package="cn.hmst.user"/>
-
-<!--    <mvc:resources location="/static/js/" mapping="/js/**"/>
-    <mvc:resources location="/static/css/" mapping="/css/**"/>
-    <mvc:resources location="/static/bootstrap3.3.5/" mapping="/bootstrap3.3.5/**"/>
-    <mvc:resources location="/static/assets/" mapping="/assets/**"/>-->
     <!--配置资源映射-->
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/js/**" location="/js/"/>

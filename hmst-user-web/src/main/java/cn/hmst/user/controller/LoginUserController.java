@@ -24,7 +24,7 @@ public class LoginUserController {
     @RequestMapping("/logout.page")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getSession().invalidate();
-        String path = "index.jsp";
+        String path = "login.jsp";
         response.sendRedirect(path);
     }
 
@@ -61,7 +61,7 @@ public class LoginUserController {
         if(StringUtils.isNotEmpty(ret)){
             request.setAttribute("ret",ret);
         }
-        String path = "index.jsp";
+        String path = "login.jsp";
         request.getRequestDispatcher(path).forward(request, response);
     }
 }

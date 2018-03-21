@@ -25,5 +25,6 @@
 <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/js/plugins/ztree/zTreeStyle.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/zxf_page.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 <!-- Nestable List -->
 <script src="${pageContext.request.contextPath}/js/plugins/nestable/jquery.nestable.js"></script>
