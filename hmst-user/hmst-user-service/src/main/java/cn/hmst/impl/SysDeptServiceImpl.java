@@ -30,7 +30,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     @Resource
     private SysLogService sysLogService;
     @Override
-    public void save(DeptParam param) {
+    public void save(DeptParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getParentId(), param.getName(), param.getId())) {
             throw new ParamException("同一层级存在相同的名字的部门");
@@ -46,7 +46,7 @@ public class SysDeptServiceImpl implements SysDeptService {
     }
 
     @Override
-    public void upDateDept(DeptParam param) {
+    public void upDateDept(DeptParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getParentId(), param.getName(), param.getId())) {
             throw new ParamException("同一层级存在相同的名字的部门");

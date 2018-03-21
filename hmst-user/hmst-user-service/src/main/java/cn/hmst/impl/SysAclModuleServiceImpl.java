@@ -30,7 +30,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
 
 
     @Override
-    public void save(AclModuleParam param) {
+    public void save(AclModuleParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getParentId(), param.getName(), param.getId())) {
             throw new ParamException("同一层级下存在相同名称的权限模块");
@@ -46,7 +46,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
     }
 
     @Override
-    public void update(AclModuleParam param) {
+    public void update(AclModuleParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getParentId(), param.getName(), param.getId())) {
             throw new ParamException("同一层级下存在相同名称的权限模块");
@@ -98,7 +98,7 @@ public class SysAclModuleServiceImpl implements SysAclModuleService {
     }
 
     @Override
-    public void delete(int aclModuleId) {
+    public void delete(int aclModuleId) throws  ParamException{
         SysAclModule aclModule = sysAclModuleMapper.selectByPrimaryKey(aclModuleId);
         Preconditions.checkNotNull(aclModule, "待删除的权限模块不存在，无法删除");
         if (sysAclModuleMapper.countByParentId(aclModule.getId()) > 0) {

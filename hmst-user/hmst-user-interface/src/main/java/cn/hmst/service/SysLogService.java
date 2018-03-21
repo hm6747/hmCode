@@ -1,5 +1,6 @@
 package cn.hmst.service;
 
+import cn.hmst.common.exception.ParamException;
 import cn.hmst.param.SearchLogParam;
 import cn.hmst.pojo.*;
 import cn.hmst.query.PageQuery;
@@ -11,9 +12,9 @@ import java.util.List;
  * Created by Administrator on 2018/3/16 0016.
  */
 public interface SysLogService {
-    PageResult<SysLogWithBLOBs> searchPageList(SearchLogParam param, PageQuery page);
+    PageResult<SysLogWithBLOBs> searchPageList(SearchLogParam param, PageQuery page) throws ParamException;
 
-    void recover(int id);
+    void recover(int id) throws  ParamException;
 
     void saveDeptLog(SysDept before, SysDept after,Integer status);
 

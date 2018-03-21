@@ -26,7 +26,7 @@ public class SysAclServiceImpl implements SysAclService {
           @Resource
         private SysLogService sysLogService;
     @Override
-    public void save(AclParam param) {
+    public void save(AclParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getAclModuleId(), param.getName(), param.getId())) {
             throw new ParamException("当前权限模块下面存在相同名称的权限点");
@@ -42,7 +42,7 @@ public class SysAclServiceImpl implements SysAclService {
     }
 
     @Override
-    public void update(AclParam param) {
+    public void update(AclParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getAclModuleId(), param.getName(), param.getId())) {
             throw new ParamException("当前权限模块下面存在相同名称的权限点");
@@ -70,7 +70,7 @@ public class SysAclServiceImpl implements SysAclService {
     }
 
     @Override
-    public PageResult<SysAcl> getPageByAclModuleId(int aclModuleId, PageQuery page,String keyword) {
+    public PageResult<SysAcl> getPageByAclModuleId(int aclModuleId, PageQuery page,String keyword) throws  ParamException{
         BeanValidator.check(page);
         int count = sysAclMapper.countByAclModuleId(aclModuleId);
         if (count > 0) {

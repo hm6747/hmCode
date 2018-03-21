@@ -43,7 +43,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Resource
     private SysRoleUserService sysRoleUserService;
 
-    public void recover(int id) {
+    public void recover(int id) throws  ParamException{
         SysLogWithBLOBs sysLog = sysLogMapper.selectByPrimaryKey(id);
         Preconditions.checkNotNull(sysLog, "待还原的记录不存在");
         switch (sysLog.getType()) {
@@ -141,7 +141,7 @@ public class SysLogServiceImpl implements SysLogService {
     }
 
     @Override
-    public PageResult<SysLogWithBLOBs> searchPageList(SearchLogParam param, PageQuery page) {
+    public PageResult<SysLogWithBLOBs> searchPageList(SearchLogParam param, PageQuery page) throws  ParamException{
         BeanValidator.check(page);
         SearchLogDto dto = new SearchLogDto();
         dto.setType(param.getType());

@@ -27,7 +27,7 @@ public class SysUserServiceImpl  implements SysUserService{
     @Autowired
     private SysLogService sysLogService;
     @Override
-    public void save(UserParam param) {
+    public void save(UserParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkTelphoneExist(param.getTelephone(),param.getId())){
             throw new ParamException("电话已被占用");
@@ -46,7 +46,7 @@ public class SysUserServiceImpl  implements SysUserService{
         sysLogService.saveUserLog(null,user,0);
     }
 
-    public void update(UserParam param){
+    public void update(UserParam param)throws  ParamException{
         BeanValidator.check(param);
         if (checkTelphoneExist(param.getTelephone(),param.getId())){
             throw new ParamException("电话已被占用");
@@ -78,7 +78,7 @@ public class SysUserServiceImpl  implements SysUserService{
     }
 
     @Override
-    public PageResult<SysUser> getPageByDeptId(int deptId, PageQuery page,String keyword) {
+    public PageResult<SysUser> getPageByDeptId(int deptId, PageQuery page,String keyword) throws  ParamException{
         BeanValidator.check(page);
         int count = sysUserMapper.conuntByDeptId(deptId);
         if (count > 0) {

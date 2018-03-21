@@ -34,7 +34,7 @@ public class SysRoleServiceImpl implements SysRoleService{
     private SysLogService sysLogService;
 
     @Override
-    public void save(RoleParam param) {
+    public void save(RoleParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getName(), param.getId())) {
             throw new ParamException("角色名称已经存在");
@@ -49,7 +49,7 @@ public class SysRoleServiceImpl implements SysRoleService{
     }
 
     @Override
-    public void update(RoleParam param) {
+    public void update(RoleParam param) throws  ParamException{
         BeanValidator.check(param);
         if (checkExist(param.getName(), param.getId())) {
             throw new ParamException("角色名称已经存在");
@@ -67,7 +67,7 @@ public class SysRoleServiceImpl implements SysRoleService{
     }
 
     @Override
-    public PageResult<SysRole> getAll(String keyword, PageQuery pageQuery) {
+    public PageResult<SysRole> getAll(String keyword, PageQuery pageQuery) throws  ParamException{
         BeanValidator.check(pageQuery);
         int count = sysRoleMapper.countByName(keyword,null);
         if (count > 0) {
