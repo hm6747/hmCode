@@ -13,7 +13,6 @@
 
     <name>hmst-sso</name>
     <modules>
-        <module>../hmst-sso-interface</module>
         <module>hmst-sso-service</module>
         <module>hmst-sso-interface</module>
     </modules>

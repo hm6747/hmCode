@@ -1,7 +1,6 @@
 package cn.hmst.sso.filter;
 
 
-import cn.hmst.param.RequestHolder;
 import cn.hmst.pojo.SysUser;
 
 import javax.servlet.*;
@@ -23,15 +22,12 @@ public class LoginFilter implements Filter{
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
-        SysUser user = (SysUser)request.getSession().getAttribute("user");
-
+        SysUser user = (SysUser)request.getSession().getAttribute("tokenId");
         if(user == null){
-            String path = "/pages/login.jsp";
+            String path = "/login.json";
             response.sendRedirect(path);
             return;
         }
-        RequestHolder.add(user);
-        RequestHolder.add(request);
         filterChain.doFilter(request,response);
         return;
     }

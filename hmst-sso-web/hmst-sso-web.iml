@@ -11,6 +11,9 @@
         </webroots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -22,7 +25,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="hmst-user-interface" />
+    <orderEntry type="module" module-name="hmst-sso-interface" />
+    <orderEntry type="module" module-name="hmst-common" />
+    <orderEntry type="module" module-name="hmst-user-dao" />
     <orderEntry type="module" module-name="hmst-user-pojo" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.4.RELEASE" level="project" />
@@ -48,6 +53,8 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-email:1.4" level="project" />
     <orderEntry type="library" name="Maven: redis.clients:jedis:2.8.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:3.4.2-fix" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:1.7.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:1.1.6.RELEASE" level="project" />
@@ -107,15 +114,12 @@
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.5.2" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1.1" level="project" />
-    <orderEntry type="module" module-name="hmst-common" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.5" level="project" />
     <orderEntry type="library" name="Maven: commons-net:commons-net:3.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.3.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1.1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" level="project" />
-    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:3.4.2-fix" level="project" />
     <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:0.9" level="project" />
     <orderEntry type="library" name="Maven: fastdfs_client:fastdfs_client:1.25" level="project" />
   </component>
