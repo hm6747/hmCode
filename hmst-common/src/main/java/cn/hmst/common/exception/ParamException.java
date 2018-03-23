@@ -2,7 +2,6 @@ package cn.hmst.common.exception;
 
 public class ParamException extends RuntimeException {
     private static final long serialVersionUID = 6417641452178955756L;
-
     public ParamException() {
         super();
     }

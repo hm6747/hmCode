@@ -3,12 +3,13 @@ package cn.hmst.common.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Getter
 @Setter
-public class JsonData {
+public class JsonData implements Serializable{
 
     private boolean ret;
 

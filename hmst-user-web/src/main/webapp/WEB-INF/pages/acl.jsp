@@ -15,9 +15,10 @@
                 <div class="ibox-content">
                     <%--        <span class="text-muted small pull-right">最后更新：<i class="fa fa-clock-o"></i> 2015-09-01 12:00</span>--%>
                     <h2>权限模块列表</h2>
-                        <div class="ibox-tools">
-                            <a onclick="addAclModel()"  data-toggle="modal" data-target="#aclModelModal" class="btn btn-primary btn-xs" ><i class="fa fa-plus"></i>创建权限模块</a>
-                        </div>
+                    <div class="ibox-tools">
+                        <a onclick="addAclModel()" data-toggle="modal" data-target="#aclModelModal"
+                           class="btn btn-primary btn-xs"><i class="fa fa-plus"></i>创建权限模块</a>
+                    </div>
                     <p>
                         所有权限模块必须状态正常
                     </p>
@@ -34,6 +35,7 @@
                         </li>
                      {{/aclModuleList}}
                      </ol>
+
 
 
                     </script>
@@ -61,7 +63,8 @@
                         <ul class="nav nav-tabs">
                             <span class="pull-right small text-muted">总共<span id="total"></span>个权限点</span>
                             <div class="ibox-tools" style="float: right">
-                                <a onclick="addAcl()" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#aclModal"><i class="fa fa-plus"></i>创建权限点</a>
+                                <a onclick="addAcl()" class="btn btn-primary btn-xs" data-toggle="modal"
+                                   data-target="#aclModal"><i class="fa fa-plus"></i>创建权限点</a>
                             </div>
                             <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> 权限点</a>
                             </li>
@@ -140,12 +143,14 @@
                                                          </ol>
 
 
+
                         </script>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" aria-required="true" required name="name" id="addAclModelName">
+                            <input type="text" class="form-control" aria-required="true" required name="name"
+                                   id="addAclModelName">
                         </div>
                     </div>
                     <div class="form-group">
@@ -157,7 +162,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">状态</label>
                         <div class="col-sm-10">
-                            <select class="form-control m-b" id="addAclModelStatus" name="status" data-placeholder="选择状态">
+                            <select class="form-control m-b" id="addAclModelStatus" name="status"
+                                    data-placeholder="选择状态">
                                 <option value="1">有效</option>
                                 <option value="0">无效</option>
                                 <option value="2">冻结</option>
@@ -218,12 +224,14 @@
                                                          </ol>
 
 
+
                         </script>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" aria-required="true" required id="aclName"  name="name">
+                            <input type="text" class="form-control" aria-required="true" required id="aclName"
+                                   name="name">
                             <input type="hidden" name="id" id="aclId"/>
                         </div>
                     </div>
@@ -295,6 +303,7 @@
 
 
 
+
 </script>
 <script>
     var aclModuleList; //缓存树形目录
@@ -331,44 +340,44 @@
         $("#addAclModelRemark").val("");
     }
     function updateAclModel() {
-        var url = (!$("#aclModelId").val())? "/sys/aclModule/save.json" : "/sys/aclModule/update.json";
+        var url = (!$("#aclModelId").val()) ? "/sys/aclModule/save.json" : "/sys/aclModule/update.json";
         var data = $("#aclModelForm").serializeArray();
-        if($("#aclModelId").val()){
-            submitAjaxForm(url,data,function (result) {
+        if ($("#aclModelId").val()) {
+            submitAjaxForm(url, data, function (result) {
                 console.log(result)
                 itemTreeCreate();
                 $(".closeModel").click();
-            },function (result) {
+            }, function (result) {
                 console.log(result)
             });
-        }else{
-            submitAjaxForm(url,data,function (result) {
+        } else {
+            submitAjaxForm(url, data, function (result) {
                 itemTreeCreate();
                 $(".closeModel").click();
                 console.log(result)
-            },function (result) {
+            }, function (result) {
                 console.log(result)
             });
         }
     }
     function updateAcl() {
-        var url = (!$("#aclId").val())? "/sys/acl/save.json" : "/sys/acl/update.json";
+        var url = (!$("#aclId").val()) ? "/sys/acl/save.json" : "/sys/acl/update.json";
         var data = $("#aclForm").serializeArray();
-        if($("#aclId").val()){
-            submitAjaxForm(url,data,function (result) {
+        if ($("#aclId").val()) {
+            submitAjaxForm(url, data, function (result) {
                 console.log(result)
                 $(".closeModel").click();
                 searchAcl();
-            },function (result) {
+            }, function (result) {
                 console.log(result)
             });
-        }else{
-            submitAjaxForm(url,data,function (result) {
+        } else {
+            submitAjaxForm(url, data, function (result) {
                 $(".closeModel").click();
-                    console.log(result)
-                },function (result) {
-                    console.log(result)
-                });
+                console.log(result)
+            }, function (result) {
+                console.log(result)
+            });
         }
     }
     function bindBtn() {
@@ -443,33 +452,33 @@
     function loadAclList(aclModuleId, keyword) {
         var url = "/sys/acl/page.json";
         var data = {
-            aclModuleId:aclModuleId,
-            keyword:keyword
+            aclModuleId: aclModuleId,
+            keyword: keyword
         }
         var listJson = {
             aclList: "",
             "showAclModuleName": function () {
                 return aclModelTreeMap[this.aclModuleId].name;
             },
-            "showStatus": function() {
-                return this.status == 1 ? "有效": "无效";
+            "showStatus": function () {
+                return this.status == 1 ? "有效" : "无效";
             },
             "statusClass": function () {
                 return this.status == 1 ? "label-primary" : "label-danger";
             },
-            "showType": function() {
+            "showType": function () {
                 return this.type == 1 ? "菜单" : (this.type == 2 ? "按钮" : "其他");
             }
         };
         var listTemplate = $("#listTemplate").html();
         var successCallback = function (result) {
-            createMustache(listJson,result,listTemplate,$("#listTable"));
-            createListMap(result,aclMap);
+            createMustache(listJson, result, listTemplate, $("#listTable"));
+            createListMap(result, aclMap);
             $("#total").html(result.data.total);
             bindEditUserClik();
             formatData();
         }
-        getTableList(url,data,false,successCallback);
+        getTableList(url, data, false, successCallback);
     }
     function bindEditUserClik() {
         $(".editAcl").on("click", function () {
@@ -495,7 +504,7 @@
             if (targetAclModel) {
                 $("#aclModelId").val(targetAclModel.id);
                 $("#parentId").val(targetAclModel.parentId);
-                $("#aclModelName").html(targetAclModel.parentId != 0?aclModelTreeMap[targetAclModel.parentId].name:"");
+                $("#aclModelName").html(targetAclModel.parentId != 0 ? aclModelTreeMap[targetAclModel.parentId].name : "");
                 $("#addAclModelName").val(targetAclModel.name);
                 $("#addAclModelSeq").val(targetAclModel.seq);
                 $("#addAclModelStatus").val(targetAclModel.status);
@@ -505,35 +514,35 @@
     }
     function loadDpetTree(url) {
         $.ajax({
-            url: path+url,
+            url: path + url,
             success: function (result) {
                 aclModuleList = result.data;
                 var aclListTemplate = $("#aclListTemplate").html();
-                  var addAclModelListTemplate = $("#addAclModelListTemplate").html();
+                var addAclModelListTemplate = $("#addAclModelListTemplate").html();
                 var addAclListTemplate = $("#addAclListTemplate").html();
-                createMustacheTree(aclModuleList,aclListTemplate,{aclModuleList: aclModuleList},$("#aclModelTree"),"#aclModel_",nesBindEvent);
-                createMustacheTree(aclModuleList,addAclModelListTemplate,{addAclModelTreeList: aclModuleList},$("#addAclModelTree"),"#addAclModel_",nesBindEventAddAclModel);
-                createMustacheTree(aclModuleList,addAclListTemplate,{addAclTreeList: aclModuleList},$("#addAclTree"),"#addAcl_",nesBindEventAddAcl);
+                createMustacheTree(aclModuleList, aclListTemplate, {aclModuleList: aclModuleList}, $("#aclModelTree"), "#aclModel_", nesBindEvent);
+                createMustacheTree(aclModuleList, addAclModelListTemplate, {addAclModelTreeList: aclModuleList}, $("#addAclModelTree"), "#addAclModel_", nesBindEventAddAclModel);
+                createMustacheTree(aclModuleList, addAclListTemplate, {addAclTreeList: aclModuleList}, $("#addAclTree"), "#addAcl_", nesBindEventAddAcl);
                 loadAclList(lastClickAclModelId);
                 bindEditAclModelClik();
             }
         })
     }
-    function createMustacheTree(treeList,template,listData,ele,idStr,bindEvent) {
-        var ren = Mustache.render(template,listData);
+    function createMustacheTree(treeList, template, listData, ele, idStr, bindEvent) {
+        var ren = Mustache.render(template, listData);
         $(ele).html(ren);
-        recursiveRender(treeList,template,idStr,listData);
-        nestableTree(bindEvent,ele);
+        recursiveRender(treeList, template, idStr, listData);
+        nestableTree(bindEvent, ele);
     }
-    function recursiveRender(aclTreeList, aclListTemplate, idStr,aclModelTreeListData) {
+    function recursiveRender(aclTreeList, aclListTemplate, idStr, aclModelTreeListData) {
         if (aclTreeList && aclTreeList.length > 0) {
             $(aclTreeList).each(function (i, item) {
                 aclModelTreeMap[item.id] = item;
                 if (item.aclModuleList && item.aclModuleList.length > 0) {
-                    aclModelTreeListData[getFirstAttr(aclModelTreeListData)]=item.aclModuleList;
+                    aclModelTreeListData[getFirstAttr(aclModelTreeListData)] = item.aclModuleList;
                     var rendered = Mustache.render(aclListTemplate, aclModelTreeListData);
                     $(idStr + item.id).append(rendered);
-                    recursiveRender(item.aclModuleList, aclListTemplate,idStr,aclModelTreeListData);
+                    recursiveRender(item.aclModuleList, aclListTemplate, idStr, aclModelTreeListData);
                 }
             })
         }

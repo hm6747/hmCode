@@ -13,10 +13,10 @@
     <mvc:annotation-driven/>
     <context:property-placeholder location="classpath:config/fileServer.properties"></context:property-placeholder>
 
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+   <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
         <mvc:interceptors>
             <bean class="cn.hmst.user.comon.HttpInterceptor" />
-        </mvc:interceptors>
+        </mvc:interceptors>-->
 
     <!-- 启动包扫描功能 -->
     <context:component-scan base-package="cn.hmst.user"/>

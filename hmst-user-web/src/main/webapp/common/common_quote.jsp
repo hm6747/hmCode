@@ -19,7 +19,6 @@
 <link href="${pageContext.request.contextPath}/css/plugins/iCheck/custom.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/plugins/summernote/summernote.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/plugins/fileinput/fileinput.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet">
