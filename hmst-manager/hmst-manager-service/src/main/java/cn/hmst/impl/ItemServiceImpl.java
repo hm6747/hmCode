@@ -1,6 +1,5 @@
 package cn.hmst.impl;
 
-import cn.hmst.common.pojo.EasyUIDataGridResult;
 import cn.hmst.common.pojo.HmResult;
 import cn.hmst.common.util.IDUtils;
 import cn.hmst.mapper.TbItemDescMapper;
@@ -8,9 +7,11 @@ import cn.hmst.mapper.TbItemMapper;
 import cn.hmst.pojo.TbItem;
 import cn.hmst.pojo.TbItemDesc;
 import cn.hmst.pojo.TbItemExample;
+import cn.hmst.query.PageQuery;
 import cn.hmst.service.ItemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,16 +44,16 @@ public class ItemServiceImpl  implements ItemService{
     }
 
     @Override
-    public EasyUIDataGridResult getItemList(int page, int rows) {
-        PageHelper.startPage(page, rows);
+    public PageInfo<TbItem> getItemList(PageQuery pageQuery,String keyWord) {
+        PageHelper.startPage(pageQuery.getPageNo(), pageQuery.getPageSize());
         TbItemExample example = new TbItemExample();
+        TbItemExample.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotEmpty(keyWord)){
+            criteria.andTitleLike("%"+keyWord+"%");
+        }
         List<TbItem> list = itemMapper.selectByExample(example);
-        EasyUIDataGridResult result = new EasyUIDataGridResult();
-        result.setRows(list);
         PageInfo<TbItem> pageInfo = new PageInfo<TbItem>(list);
-        long total = pageInfo.getTotal();
-        result.setTotal(total);
-        return result;
+        return pageInfo;
     }
 
     @Override
