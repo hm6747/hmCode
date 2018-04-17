@@ -24,8 +24,6 @@
                 <bean class="cn.hmst.sso.interceptor.LoginInterceptor"/>
             </mvc:interceptor>
     </mvc:interceptors>
-    <!-- 启动包扫描功能 -->
-    <context:component-scan base-package="cn.hmst.sso"/>
     <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
     <bean class="cn.hmst.sso.exception.SpringExceptionResolver"/>
     <!--配置资源映射-->
@@ -38,6 +36,7 @@
     </bean>
     <!-- 引用dubbo服务 -->
     <dubbo:application name="hmst-sso-web"/>
-    <dubbo:registry protocol="zookeeper" address="120.79.53.121:7011"/>
+    <dubbo:registry protocol="zookeeper" address="120.79.53.121:7007"/>
     <dubbo:reference interface="cn.hmst.sso.service.LoginService" id="loginService"/>
+    <dubbo:reference interface="cn.hmst.service.SysUserService" id="sysUserService"/>
 </beans>

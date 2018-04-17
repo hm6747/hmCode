@@ -29,15 +29,17 @@
     <orderEntry type="module" module-name="hmst-common" />
     <orderEntry type="module" module-name="hmst-user-dao" />
     <orderEntry type="module" module-name="hmst-user-pojo" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:3.4.2-fix" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.30" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.20" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.2.4.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.3.0" level="project" />
-    <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.20" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.30" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.12" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.5.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.1.8" level="project" />
@@ -53,8 +55,7 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-email:1.4" level="project" />
     <orderEntry type="library" name="Maven: redis.clients:jedis:2.8.1" level="project" />
-    <orderEntry type="library" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" level="project" />
-    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:3.4.2-fix" level="project" />
+    <orderEntry type="module" module-name="hmst-user-interface" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:1.7.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:1.1.6.RELEASE" level="project" />

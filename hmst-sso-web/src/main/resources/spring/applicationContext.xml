@@ -8,23 +8,57 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
     <context:annotation-config/>
+    <!-- 载入redis.properties,这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
+    <context:property-placeholder location="classpath:/config/redis.properties" />
+    <!-- 启动包扫描功能 -->
+    <context:component-scan base-package="cn.hmst.sso"/>
+    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
     <bean id="redisHttpSessionConfiguration"
           class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
-        <property name="maxInactiveIntervalInSeconds" value="60"/>
+        <property name="maxInactiveIntervalInSeconds" value="6000"/>
     </bean>
 
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="20" />
-        <property name="maxIdle" value="20" />
+        <property name="maxTotal" value="${spring.redis.pool.maxTotal}"></property>
+        <property name="maxIdle" value="${spring.redis.pool.maxIdle}"></property>
+        <property name="minIdle" value="${spring.redis.pool.minIdle}"></property>
+        <property name="maxWaitMillis" value="${spring.redis.pool.maxWait}"></property>
     </bean>
     <util:constant static-field="org.springframework.session.data.redis.config.ConfigureRedisAction.NO_OP"/>
     <bean id="jedisConnectionFactory"
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
-        <property name="hostName" value="120.79.53.121"/>
-        <property name="port" value="7000"/>
-        <property name="password" value="Hm123456" />
-        <property name="timeout" value="3000"/>
+        <!-- IP地址 -->
+        <property name="hostName" value="${spring.redis.host}"></property>
+        <!-- 端口号 -->
+        <property name="port" value="${spring.redis.port}"></property>
+        <!-- 密码 -->
+        <property name="password" value="${spring.redis.password}"></property>
+        <property name="database" value="${spring.redis.database}"></property>
+        <property name="timeout" value="${spring.redis.timeout}"></property>
+        <!-- usePool：是否使用连接池 -->
         <property name="usePool" value="true"/>
+        <!-- 连接池配置引用 -->
         <property name="poolConfig" ref="jedisPoolConfig"/>
     </bean>
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+         <!--开启事务-->
+        <property name="enableTransactionSupport" value="true"></property>
+    </bean>
+    <bean id="redisrCacheManager" class="cn.hmst.sso.utils.RedisCacheManager">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
 </beans>
